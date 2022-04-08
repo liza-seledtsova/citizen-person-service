@@ -20,8 +20,8 @@ All URIs are relative to *http://localhost/person.swagger.io/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PersonApi* | [**getAllPerson**](docs/PersonApi.md#getAllPerson) | **GET** /person | Get all person and generate filter data for providing sorting and/or filtering entry
-*PersonApi* | [**getPersonsFiltered**](docs/PersonApi.md#getPersonsFiltered) | **POST** /person | The sorting and/or filtering options person data
+*PersonApi* | [**getAllPerson**](gen/docs/PersonApi.md#getAllPerson) | **GET** /person | Get all person and generate filter data for providing sorting and/or filtering entry
+*PersonApi* | [**getPersonsFiltered**](gen/docs/PersonApi.md#getPersonsFiltered) | **POST** /person | The sorting and/or filtering options person data
 
 
 ## Documentation for Models
