@@ -14,8 +14,6 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/openapi-java-client-1.0.1.jar`
-* `target/lib/*.jar`
 
 ## Getting Started
 
@@ -75,12 +73,3 @@ Class | Method | HTTP request | Description
  - [Person](docs/Person.md)
  - [State](docs/State.md)
 
-
-## Documentation for Authorization
-
-All endpoints do not require authorization.
-Authentication schemes defined for the API:
-
-## Recommendation
-
-It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
