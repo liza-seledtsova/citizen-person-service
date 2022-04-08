@@ -38,8 +38,10 @@ Class | Method | HTTP request | Description
  - [State](gen/docs/State.md)
 
 ## Future improvements
-  -Create NoSql Database(MongoDb, ELK) to improve the efficiency of filtering nested objects.
-  -Generate a filterName from entity 
-  -Decompose creteria and spefication to various iterfaces
-  -Add validation inputDate
-  -Generate messages in responce based on the type of error
+<ul>
+  <li>-Create NoSql Database(MongoDb, ELK) to improve the efficiency of filtering nested objects.</li>
+  <li>-Generate a filterName from entity </li>
+  <li>-Decompose creteria and spefication to various iterfaces</li>
+  <li>-Add validation inputDate</li>
+  <li>-Generate messages in responce based on the type of error</li>
+<ul>
