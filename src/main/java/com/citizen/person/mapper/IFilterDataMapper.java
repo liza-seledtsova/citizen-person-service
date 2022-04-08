@@ -1,4 +1,4 @@
-package com.citizen.person.mapper.impl;
+package com.citizen.person.mapper;
 
 import com.citizen.person.dto.FilterDataDto;
 import com.citizen.person.entity.Person;

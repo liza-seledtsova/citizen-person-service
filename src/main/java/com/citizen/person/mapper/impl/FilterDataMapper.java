@@ -1,9 +1,9 @@
-package com.citizen.person.mapper;
+package com.citizen.person.mapper.impl;
 
 import com.citizen.person.dto.FilterDataDto;
 import com.citizen.person.entity.Address;
 import com.citizen.person.entity.Person;
-import com.citizen.person.mapper.impl.IFilterDataMapper;
+import com.citizen.person.mapper.IFilterDataMapper;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 

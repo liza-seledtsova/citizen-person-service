@@ -3,7 +3,7 @@ package com.citizen.person.controller;
 import com.citizen.person.dto.FilterDto;
 import com.citizen.person.dto.PageImpl;
 import com.citizen.person.entity.Person;
-import com.citizen.person.service.person.impl.IPersonService;
+import com.citizen.person.service.person.IPersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

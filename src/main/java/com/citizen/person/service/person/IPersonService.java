@@ -1,4 +1,4 @@
-package com.citizen.person.service.person.impl;
+package com.citizen.person.service.person;
 
 import com.citizen.person.dto.FilterDataDto;
 import com.citizen.person.dto.FilterDto;

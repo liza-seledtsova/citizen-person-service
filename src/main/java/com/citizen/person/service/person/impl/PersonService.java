@@ -1,12 +1,12 @@
-package com.citizen.person.service.person;
+package com.citizen.person.service.person.impl;
 
 import com.citizen.person.dto.FilterDataDto;
 import com.citizen.person.dto.FilterDto;
 import com.citizen.person.dto.PageImpl;
 import com.citizen.person.entity.Person;
-import com.citizen.person.mapper.impl.IFilterDataMapper;
-import com.citizen.person.repository.impl.PersonRepository;
-import com.citizen.person.service.person.impl.IPersonService;
+import com.citizen.person.mapper.IFilterDataMapper;
+import com.citizen.person.repository.PersonRepository;
+import com.citizen.person.service.person.IPersonService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

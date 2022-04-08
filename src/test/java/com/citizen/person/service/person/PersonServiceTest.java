@@ -16,9 +16,9 @@ import com.citizen.person.entity.Person;
 import com.citizen.person.enums.FilterName;
 import com.citizen.person.enums.FilterType;
 import com.citizen.person.enums.Sorting;
-import com.citizen.person.mapper.FilterDataMapper;
-import com.citizen.person.mapper.impl.IFilterDataMapper;
-import com.citizen.person.repository.impl.PersonRepository;
+import com.citizen.person.mapper.IFilterDataMapper;
+import com.citizen.person.repository.PersonRepository;
+import com.citizen.person.service.person.impl.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.Date;

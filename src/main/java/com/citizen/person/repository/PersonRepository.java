@@ -1,4 +1,4 @@
-package com.citizen.person.repository.impl;
+package com.citizen.person.repository;
 
 import com.citizen.person.entity.Person;
 import org.springframework.data.jpa.repository.JpaRepository;

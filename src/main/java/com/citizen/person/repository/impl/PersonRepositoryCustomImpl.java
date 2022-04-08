@@ -1,8 +1,8 @@
-package com.citizen.person.repository;
+package com.citizen.person.repository.impl;
 
 import com.citizen.person.dto.FilterDataDto;
 import com.citizen.person.entity.Person;
-import com.citizen.person.repository.impl.PersonRepositoryCustom;
+import com.citizen.person.repository.PersonRepositoryCustom;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.data.domain.Sort;
