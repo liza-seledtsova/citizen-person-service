@@ -2,36 +2,46 @@
 ## Requirements
 
 Building the person service:
-1. Java 1.7+
+1. Java 11+
 2. Gradle
 
 ## Installation
-At first generate the JAR by executing:
+1)Cloning a repository - https://github.com/liza-seledtsova/citizen-person-service.git
+
+2)To run the application, run the following command in a terminal window (in the complete) directory:
 
 ```shell
+./gradlew bootRun
 ```
+3)Open swagger ui - http://localhost:8081/swagger-ui/index.html#/person-controller/getPersonsFiltered
 
-Then manually install the following JARs:
  
  
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost/person.swagger.io/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PersonApi* | [**getAllPerson**](docs/PersonApi.md#getAllPerson) | **GET** /person | Get all person and generate filter data for providing sorting and/or filtering entry
-*PersonApi* | [**getPersonsFiltered**](docs/PersonApi.md#getPersonsFiltered) | **POST** /person | The sorting and/or filtering options person data
+*PersonService* | [**getAllPerson**](gen/docs/PersonApi.md#getAllPerson) | **GET** /person | Get all person and generate filter data for providing sorting and/or filtering entry
+*PersonService* | [**getPersonsFiltered**](gen/docs/PersonApi.md#getPersonsFiltered) | **POST** /person | The sorting and/or filtering options person data
 
 
 ## Documentation for Models
 
- - [Address](docs/Address.md)
- - [City](docs/City.md)
- - [Country](docs/Country.md)
- - [FilterDataDto](docs/FilterDataDto.md)
- - [FilterDto](docs/FilterDto.md)
- - [ModelApiResponse](docs/ModelApiResponse.md)
- - [Person](docs/Person.md)
- - [State](docs/State.md)
+ - [Address](gen/docs/Address.md)
+ - [City](gen/docs/City.md)
+ - [Country](gen/docs/Country.md)
+ - [FilterDataDto](gen/docs/FilterDataDto.md)
+ - [FilterDto](gen/docs/FilterDto.md)
+ - [ModelApiResponse](gen/docs/ModelApiResponse.md)
+ - [Person](gen/docs/Person.md)
+ - [State](gen/docs/State.md)
 
+## Future improvements
+<ul>
+  <li>Create NoSql Database(MongoDb, ELK) to improve the efficiency of filtering nested objects.</li>
+  <li>Generate a filterName from entity </li>
+  <li>Decompose creteria and spefication to various iterfaces</li>
+  <li>Add validation input data</li>
+  <li>Generate messages in responce based on the type of error</li>
+<ul>
