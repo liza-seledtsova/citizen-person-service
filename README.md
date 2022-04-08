@@ -39,9 +39,9 @@ Class | Method | HTTP request | Description
 
 ## Future improvements
 <ul>
-  <li>-Create NoSql Database(MongoDb, ELK) to improve the efficiency of filtering nested objects.</li>
-  <li>-Generate a filterName from entity </li>
-  <li>-Decompose creteria and spefication to various iterfaces</li>
-  <li>-Add validation inputDate</li>
-  <li>-Generate messages in responce based on the type of error</li>
+  <li>Create NoSql Database(MongoDb, ELK) to improve the efficiency of filtering nested objects.</li>
+  <li>Generate a filterName from entity </li>
+  <li>Decompose creteria and spefication to various iterfaces</li>
+  <li>Add validation input data</li>
+  <li>Generate messages in responce based on the type of error</li>
 <ul>
