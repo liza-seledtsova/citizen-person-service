@@ -5,15 +5,14 @@ import com.citizen.person.dto.FilterDto;
 import com.citizen.person.dto.PageImpl;
 import com.citizen.person.entity.Person;
 import com.citizen.person.mapper.impl.IFilterDataMapper;
-import com.citizen.person.repository.PersonRepository;
-import com.citizen.person.service.filter.FilterService;
+import com.citizen.person.repository.impl.PersonRepository;
 import com.citizen.person.service.person.impl.IPersonService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +27,6 @@ import java.util.stream.Collectors;
 public class PersonService implements IPersonService {
 
     private final PersonRepository personRepository;
-    private final FilterService filterService;
     private final IFilterDataMapper filterDataMapper;
     private final ObjectMapper objectMapper;
 
@@ -50,11 +48,11 @@ public class PersonService implements IPersonService {
 
     @Override
     public FilterDto getPersonsFiltered(FilterDto filterDto, Pageable pageable) {
-        if(log.isDebugEnabled()){
+        if (log.isDebugEnabled()) {
             try {
                 log.debug("The provided data: {}", objectMapper.writeValueAsString(filterDto));
             } catch (JsonProcessingException e) {
-                log.error("Exception on the parsing process filerDro to JSON",e);
+                log.error("Exception on the parsing process filerDro to JSON", e);
             }
         }
         filterDto.setResult(filterData(filterDto.getFilterDataDto(), pageable));
@@ -62,6 +60,7 @@ public class PersonService implements IPersonService {
     }
 
     public PageImpl<Person> filterData(List<FilterDataDto> filter, Pageable pageable) {
-        return filterService.filter(filter, pageable);
+        List<Person> persons = personRepository.filter(filter, pageable.isPaged() ? pageable.getSort() : Sort.unsorted(), pageable.getOffset(), pageable.getPageSize());
+        return new PageImpl(persons, pageable.getPageNumber(), pageable.getPageSize(), new ObjectMapper().valueToTree(pageable), persons.size());
     }
 }

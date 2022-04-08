@@ -1,4 +1,4 @@
-package com.citizen.person.repository;
+package com.citizen.person.repository.impl;
 
 import com.citizen.person.entity.Address;
 import org.springframework.data.repository.CrudRepository;

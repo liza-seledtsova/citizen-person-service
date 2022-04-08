@@ -1,12 +1,21 @@
 server:
-  port: 8080
+  port: 8081
 spring:
+  h2:
+    console.enabled: true
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/citizen
-    username: root
-    password: 2o@Q9*W53
+    initialization-mode : always
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+    platform: h2
   jpa:
-    database-platform: "org.hibernate.dialect.MySQL8Dialect"
-    hibernate:
-      ddl-auto: update
+    defer-datasource-initialization: true
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    ddl-auto: none
+springdoc:
+  swagger-ui:
+    url: /openapi.yaml
+  api-docs:
+    enabled=false:

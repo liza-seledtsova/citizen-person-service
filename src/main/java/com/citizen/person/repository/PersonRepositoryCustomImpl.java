@@ -1,15 +1,12 @@
-package com.citizen.person.service.filter;
+package com.citizen.person.repository;
 
 import com.citizen.person.dto.FilterDataDto;
-import com.citizen.person.dto.PageImpl;
 import com.citizen.person.entity.Person;
-import com.citizen.person.service.filter.impl.IFilterService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.citizen.person.repository.impl.PersonRepositoryCustom;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,33 +20,28 @@ import java.util.stream.Collectors;
 
 import static org.springframework.data.jpa.repository.query.QueryUtils.toOrders;
 
-/**
- * The type Filter service.
- */
+@Repository
 @Slf4j
-@Service
-public class FilterService implements IFilterService {
+public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
+
     @PersistenceContext
     private EntityManager entityManager;
     private final static String UNDER_SCORE = "_";
 
-
     @Override
-    public PageImpl filter(List<FilterDataDto> filter, Pageable pageable) {
+    public List<Person> filter(List<FilterDataDto> filter, Sort sort, long offSet, int pageSize) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Person> criteriaQuery = criteriaBuilder.createQuery(Person.class);
         Root<Person> root = criteriaQuery.from(Person.class);
         predicateRootBuilder(criteriaBuilder, filter, root, criteriaQuery);
-        Sort sort = pageable.isPaged() ? pageable.getSort() : Sort.unsorted();
         criteriaQuery.orderBy(toOrders(sort, root, criteriaBuilder));
         criteriaQuery.distinct(true);
         TypedQuery<Person> typedQuery = entityManager.createQuery(criteriaQuery);
         long total = typedQuery.getResultList().size();
-        typedQuery.setFirstResult((int) pageable.getOffset());
-        typedQuery.setMaxResults(pageable.getPageSize());
-        List<Person> content = total > pageable.getOffset() ? typedQuery.getResultList() : Collections.<Person>emptyList();
+        typedQuery.setFirstResult((int) offSet);
+        typedQuery.setMaxResults(pageSize);
         log.info("Search hints with filter data: {}", total);
-        return new PageImpl(content, pageable.getPageNumber(), pageable.getPageSize(), new ObjectMapper().valueToTree(pageable), total);
+        return  total > offSet ? typedQuery.getResultList() : Collections.<Person>emptyList();
     }
 
     private void predicateRootBuilder(CriteriaBuilder builder, List<FilterDataDto> filterData, Root<Person> root, CriteriaQuery<Person> criteriaQuery) {
