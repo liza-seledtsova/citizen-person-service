@@ -1,16 +1,13 @@
 package com.citizen.person.entity;
 
-import com.citizen.person.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
-
-import static javax.persistence.CascadeType.ALL;
 
 /**
  * The person entity.
