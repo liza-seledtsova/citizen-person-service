@@ -10,6 +10,7 @@ At first generate the JAR by executing:
 
 ```shell
 ```
+Open swagger ui - http://localhost:8081/swagger-ui/index.html#/person-controller/getPersonsFiltered
 
 Then manually install the following JARs:
  
