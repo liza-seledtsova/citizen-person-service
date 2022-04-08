@@ -6,13 +6,27 @@ Building the person service:
 2. Gradle
 
 ## Installation
-1)Cloning a repository - https://github.com/liza-seledtsova/citizen-person-service.git
+#These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+1)Copy the project from git repository - https://github.com/liza-seledtsova/citizen-person-service.git
 
 2)To run the application, run the following command in a terminal window (in the complete) directory:
 
-```shell
-./gradlew bootRun
 ```
+```
+//Build the project with Gradle
+gradle bootJar
+```
+```
+//Run the project
+cd build/distribution/bin
+start.sh
+```
+```
+//Run the project with "java" command
+cd build/distribution/libs
+java -jar access-provider-{app-version}.jar --port=8081
+``
 3)Open swagger ui - http://localhost:8081/swagger-ui/index.html#/person-controller/getPersonsFiltered
 
  
@@ -42,6 +56,4 @@ Class | Method | HTTP request | Description
   <li>Create NoSql Database(MongoDb, ELK) to improve the efficiency of filtering nested objects.</li>
   <li>Generate a filterName from entity </li>
   <li>Decompose creteria and spefication to various iterfaces</li>
-  <li>Add validation input data</li>
-  <li>Generate messages in responce based on the type of error</li>
 <ul>
