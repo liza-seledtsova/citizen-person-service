@@ -6,13 +6,15 @@ Building the person service:
 2. Gradle
 
 ## Installation
-At first generate the JAR by executing:
+1)Cloning a repository - https://github.com/liza-seledtsova/citizen-person-service.git
+
+2)To run the application, run the following command in a terminal window (in the complete) directory:
 
 ```shell
+./gradlew bootRun
 ```
-Open swagger ui - http://localhost:8081/swagger-ui/index.html#/person-controller/getPersonsFiltered
+3)Open swagger ui - http://localhost:8081/swagger-ui/index.html#/person-controller/getPersonsFiltered
 
-Then manually install the following JARs:
  
  
 ## Documentation for API Endpoints
