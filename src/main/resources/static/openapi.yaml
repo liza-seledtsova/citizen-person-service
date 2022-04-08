@@ -13,6 +13,7 @@ paths:
       tags:
         - person-controller
       operationId: getAllPersons
+      description: get all person and generate filter data to filter and sort entity for /api/v1/persons/filter point
       requestBody:
         content:
           application/json:
@@ -30,6 +31,7 @@ paths:
       tags:
         - person-controller
       operationId: getPersonsFiltered
+      description: filter entity person with pair of properties
       requestBody:
         content:
           application/json:
@@ -96,22 +98,26 @@ components:
       type: object
       properties:
         sorting:
+          description: enum to sort value
           type: string
           enum:
             - ASC
             - DESC
         value:
+          description: list of avaliable value filed to sample data from entry
           example: [Glasgow, Southend]
           type: array
           items:
             type: string
         select:
+          description: list of selected value from list of value for building query
           type: array
           example: [Glasgow, Southend]
           items:
             type: string
         filterName:
           type: string
+          description: name of field to filter data on this field
           example: CITY
           enum:
             - FIRST_NAME
@@ -126,6 +132,7 @@ components:
             - DATE_OF_BIRTH
         filterType:
           example: SELECT
+          description: filter depends on the data format.Select - string value(name, surname). Range - number format(price, date)
           type: string
           enum:
             - SELECT
@@ -137,9 +144,11 @@ components:
       type: object
       properties:
         result:
+          description: filtering and sorting result
           "$ref": "#/components/schemas/PageImplPerson"
         filterDataDto:
           type: array
+          description: list of filter properties for each field in entry
           items:
             "$ref": "#/components/schemas/FilterDataDto"
         selectedField:
@@ -148,6 +157,7 @@ components:
       type: object
       properties:
         content:
+          description: filtering and sorting result
           type: array
           items:
             "$ref": "#/components/schemas/Person"
