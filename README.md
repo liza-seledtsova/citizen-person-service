@@ -2,7 +2,7 @@
 ## Requirements
 
 Building the person service:
-1. Java 1.7+
+1. Java 11+
 2. Gradle
 
 ## Installation
