@@ -37,3 +37,9 @@ Class | Method | HTTP request | Description
  - [Person](gen/docs/Person.md)
  - [State](gen/docs/State.md)
 
+## Future improvements
+  -Create NoSql Database(MongoDb, ELK) to improve the efficiency of filtering nested objects.
+  -Generate a filterName from entity 
+  -Decompose creteria and spefication to various iterfaces
+  -Add validation inputDate
+  -Generate messages in responce based on the type of error
