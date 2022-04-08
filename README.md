@@ -9,7 +9,6 @@ Building the person service:
 At first generate the JAR by executing:
 
 ```shell
-mvn clean package
 ```
 
 Then manually install the following JARs:
