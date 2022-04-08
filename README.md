@@ -26,12 +26,12 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [Address](docs/Address.md)
- - [City](docs/City.md)
- - [Country](docs/Country.md)
- - [FilterDataDto](docs/FilterDataDto.md)
- - [FilterDto](docs/FilterDto.md)
- - [ModelApiResponse](docs/ModelApiResponse.md)
- - [Person](docs/Person.md)
- - [State](docs/State.md)
+ - [Address](gen/docs/Address.md)
+ - [City](gen/docs/City.md)
+ - [Country](gen/docs/Country.md)
+ - [FilterDataDto](gen/docs/FilterDataDto.md)
+ - [FilterDto](gen/docs/FilterDto.md)
+ - [ModelApiResponse](gen/docs/ModelApiResponse.md)
+ - [Person](gen/docs/Person.md)
+ - [State](gen/docs/State.md)
 
