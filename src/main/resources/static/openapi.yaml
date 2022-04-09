@@ -1,24 +1,18 @@
----
 openapi: 3.0.1
 info:
   title: Person API
-  description: Person Information
+  description: Person Information Service
   version: '1.0'
 servers:
   - url: http://localhost:8081
     description: Generated server url
 paths:
-  "/api/v1/persons":
-    post:
+  "/api/v1/state":
+    get:
       tags:
-        - person-controller
-      operationId: getAllPersons
-      description: get all person and generate filter data to filter and sort entity for /api/v1/persons/filter point
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/Pageable"
+        - state
+      operationId: getAllState
+      description: Get All entry of state
       responses:
         '200':
           description: OK
@@ -26,12 +20,797 @@ paths:
             "*/*":
               schema:
                 type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    put:
+      tags:
+        - state
+      operationId: updateState
+      description: Merge data from dto to entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/StateDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    post:
+      tags:
+        - state
+      operationId: createState
+      description: Create state
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/StateDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+  "/api/v1/persons":
+    get:
+      tags:
+        - person
+      operationId: getAllPersons
+      description: Get all person
+      parameters:
+        - name: pageNumber
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    put:
+      tags:
+        - person
+      operationId: updatePerson
+      description: Merge person data from dto to entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PersonDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    post:
+      tags:
+        - person
+      operationId: createPerson
+      description: Create Person
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PersonDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+  "/api/v1/country":
+    get:
+      tags:
+        - country
+      operationId: getAllCountry
+      description: Get All country
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    put:
+      tags:
+        - country
+      operationId: updateCountry
+      description: Merge country data from dto to entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CountryDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    post:
+      tags:
+        - country
+      operationId: createCountry
+      description: Create country
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CountryDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+  "/api/v1/city":
+    get:
+      tags:
+        - city
+      operationId: getAllCity
+      description: Get All city
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    put:
+      tags:
+        - city
+      operationId: updateCity
+      description: Merge  city a from dto to entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CityDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    post:
+      tags:
+        - city
+      operationId: createCity
+      description: Create city
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CityDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+  "/api/v1/address":
+    get:
+      tags:
+        - address
+      operationId: getAllAddress
+      description: Get all address
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    put:
+      tags:
+        - address
+      operationId: updateAddress
+      description: Merge address data from dto to entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AddressDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    post:
+      tags:
+        - address
+      operationId: createAddress
+      description: Create address
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AddressDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
   "/api/v1/persons/filter":
     post:
       tags:
-        - person-controller
+        - person
       operationId: getPersonsFiltered
-      description: filter entity person with pair of properties
+      description: Operation to filter and sort data on any filed (firstName, address1, countryCode, state), select multiple values for sampling
       requestBody:
         content:
           application/json:
@@ -45,6 +824,597 @@ paths:
             "*/*":
               schema:
                 type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+  "/api/v1/state/{stateId}":
+    get:
+      tags:
+        - state
+      operationId: getStateById
+      description: Get state by id
+      parameters:
+        - name: stateId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    delete:
+      tags:
+        - state
+      operationId: deleteState
+      description: Delete state by id
+      parameters:
+        - name: stateId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+  "/api/v1/persons/{personsId}":
+    get:
+      tags:
+        - person
+      operationId: getPersonById
+      parameters:
+        - name: personsId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    delete:
+      tags:
+        - person
+      operationId: deletePerson
+      description: Delete person
+      parameters:
+        - name: personsId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+  "/api/v1/country/{countryId}":
+    get:
+      tags:
+        - country
+      operationId: getCountryById
+      description: get dountry by id
+      parameters:
+        - name: countryId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+  "/api/v1/city/{cityId}":
+    get:
+      tags:
+        - city
+      operationId: getCityById
+      description: get city by id
+      parameters:
+        - name: cityId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    delete:
+      tags:
+        - city
+      operationId: deleteCity
+      description: Delete city by id
+      parameters:
+        - name: cityId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+  "/api/v1/address/{addressId}":
+    get:
+      tags:
+        - address
+      operationId: getAddressById
+      description: Get address by id
+      parameters:
+        - name: addressId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+    delete:
+      tags:
+        - address
+      operationId: deleteAddress
+      description: Delete adress by id
+      parameters:
+        - name: addressId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+  "/api/v1/country/{countyId}":
+    delete:
+      tags:
+        - country
+      operationId: deleteCountry
+      description: Delete country by id
+      parameters:
+        - name: countyId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '405':
+          description: Method Not Allowed
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '406':
+          description: Not Acceptable
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '415':
+          description: Unsupported Media Type
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorMessage"
 components:
   schemas:
     Pageable:
@@ -245,3 +1615,89 @@ components:
           type: string
         country:
           "$ref": "#/components/schemas/Country"
+    ErrorMessage:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        timestamp:
+          type: string
+          format: date-time
+        message:
+          type: string
+        description:
+          type: string
+    CountryDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        countryCode:
+          type: string
+    StateDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        country:
+          "$ref": "#/components/schemas/CountryDto"
+    AddressDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        address1:
+          type: string
+        address2:
+          type: string
+        postCode:
+          type: string
+        city:
+          "$ref": "#/components/schemas/CityDto"
+    CityDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        state:
+          "$ref": "#/components/schemas/StateDto"
+    PersonDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        surname:
+          type: string
+        gender:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date-time
+        address:
+          type: array
+          items:
+            "$ref": "#/components/schemas/AddressDto"
+
+
+
+
+
+
+
+
+
+
+
+

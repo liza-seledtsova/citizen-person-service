@@ -29,7 +29,7 @@ public class PersonController {
      * @return the all persons
      */
     @GetMapping("/persons")
-    public ResponseEntity getAllPersons(@RequestParam int pageNumber, @RequestParam int pageSize) {
+    public ResponseEntity getPersonById(@RequestParam int pageNumber, @RequestParam int pageSize) {
         List<PersonDto> persons = personService.getAll();
         return ResponseEntity
                 .ok()
@@ -40,7 +40,7 @@ public class PersonController {
 
     @GetMapping("/persons/{personsId}")
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity getAllPersons(@PathVariable Long personsId) {
+    public ResponseEntity getPersonById(@PathVariable Long personsId) {
         return ResponseEntity
                 .ok()
                 .body(personService.getById(personsId));

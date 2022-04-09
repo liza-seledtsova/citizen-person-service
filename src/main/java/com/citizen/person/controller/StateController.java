@@ -65,7 +65,7 @@ public class StateController {
      * @return the response entity
      */
     @PutMapping("/state")
-    public ResponseEntity updatePerson(@RequestBody StateDto state) {
+    public ResponseEntity updateState(@RequestBody StateDto state) {
         stateService.update(state);
         return ResponseEntity
                 .ok()
