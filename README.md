@@ -10,9 +10,9 @@ Building the person service:
 ## Installation
 ### These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-#### 1)Copy the project from git repository - https://github.com/liza-seledtsova/citizen-person-service.git
+#### 1) Copy the project from git repository - https://github.com/liza-seledtsova/citizen-person-service.git
 
-#### 2)To run the application, run the following command in a terminal window (in the complete) directory:
+#### 2) To run the application, run the following command in a terminal window (in the complete) directory:
 
 ```
 //Build the project with Gradle
