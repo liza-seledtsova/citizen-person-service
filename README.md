@@ -8,7 +8,7 @@ Building the person service:
 2. Gradle 7.3+
 
 ## Installation
-#These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+# These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### 1)Copy the project from git repository - https://github.com/liza-seledtsova/citizen-person-service.git
 
