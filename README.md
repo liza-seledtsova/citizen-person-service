@@ -1,5 +1,5 @@
 
-## The REST-ful web person service with CRUD, filter, sort anf groping operation.
+## The REST-ful web service with CRUD, filter, sort anf groping operation.
 
 ## Requirements
 
