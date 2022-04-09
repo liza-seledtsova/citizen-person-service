@@ -5,7 +5,7 @@
 
 Building the person service:
 1. Java 11+
-2. Gradle 7.3
+2. Gradle 7.3+
 
 ## Installation
 #These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
