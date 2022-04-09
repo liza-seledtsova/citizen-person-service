@@ -1,8 +1,8 @@
 package com.citizen.person.mapper.impl;
 
+import com.citizen.person.dto.AddressDto;
 import com.citizen.person.dto.FilterDataDto;
-import com.citizen.person.entity.Address;
-import com.citizen.person.entity.Person;
+import com.citizen.person.dto.PersonDto;
 import com.citizen.person.mapper.IFilterDataMapper;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class FilterDataMapper implements IFilterDataMapper {
 
 
     @Override
-    public List<FilterDataDto> generateFilterFacetValue(List<Person> persons) {
+    public List<FilterDataDto> generateFilterFacetValue(List<PersonDto> persons) {
         return !persons.isEmpty() ? List.of(buildFirstNameFacets(persons),
                 buildSurnameFacets(persons),
                 buildCountyCode(persons),
@@ -31,6 +31,7 @@ public class FilterDataMapper implements IFilterDataMapper {
                 buildCityFacets(persons),
                 buildGenderFacets(persons),
                 buildStateFacets(persons),
+                buildPostCodeFacets(persons),
                 buildDateOfBirthFacets(persons),
                 buildAdditionAddressFacets(persons),
                 buildCityFacets(persons))
@@ -43,12 +44,12 @@ public class FilterDataMapper implements IFilterDataMapper {
      * @param persons the persons
      * @return the filter data dto
      */
-    public FilterDataDto buildFirstNameFacets(List<Person> persons) {
+    public FilterDataDto buildFirstNameFacets(List<PersonDto> persons) {
         return FilterDataDto.builder()
                 .filterName(FIRST_NAME)
                 .value(persons.stream()
                         .filter(person -> Strings.isNotBlank(person.getFirstName()))
-                        .map(Person::getFirstName)
+                        .map(PersonDto::getFirstName)
                         .distinct()
                         .collect(Collectors.toList()))
                 .filterType(SELECT)
@@ -61,12 +62,12 @@ public class FilterDataMapper implements IFilterDataMapper {
      * @param persons the persons
      * @return the filter data dto
      */
-    public FilterDataDto buildSurnameFacets(List<Person> persons) {
+    public FilterDataDto buildSurnameFacets(List<PersonDto> persons) {
         return FilterDataDto.builder()
                 .filterName(SURNAME)
                 .value(persons.stream()
                         .filter(person -> Strings.isNotBlank(person.getSurname()))
-                        .map(Person::getSurname)
+                        .map(PersonDto::getSurname)
                         .distinct()
                         .collect(Collectors.toList()))
                 .filterType(SELECT)
@@ -79,13 +80,13 @@ public class FilterDataMapper implements IFilterDataMapper {
      * @param persons the persons
      * @return the filter data dto
      */
-    public FilterDataDto buildAddressFacets(List<Person> persons) {
+    public FilterDataDto buildAddressFacets(List<PersonDto> persons) {
         return FilterDataDto.builder()
                 .filterName(ADDRESS1)
                 .value(persons.stream()
                         .flatMap(person -> person.getAddress().stream()
                                 .filter(address -> Strings.isNotBlank(address.getAddress1()))
-                                .map(Address::getAddress1))
+                                .map(AddressDto::getAddress1))
                         .distinct()
                         .collect(Collectors.toList()))
                 .filterType(SELECT)
@@ -98,13 +99,13 @@ public class FilterDataMapper implements IFilterDataMapper {
      * @param persons the persons
      * @return the filter data dto
      */
-    public FilterDataDto buildAdditionAddressFacets(List<Person> persons) {
+    public FilterDataDto buildAdditionAddressFacets(List<PersonDto> persons) {
         return FilterDataDto.builder()
                 .filterName(ADDRESS1)
                 .value(persons.stream()
                         .flatMap(person -> person.getAddress().stream()
                                 .filter(address -> Strings.isNotBlank(address.getAddress2()))
-                                .map(Address::getAddress1))
+                                .map(AddressDto::getAddress1))
                         .distinct()
                         .collect(Collectors.toList()))
                 .filterType(SELECT)
@@ -117,7 +118,7 @@ public class FilterDataMapper implements IFilterDataMapper {
      * @param persons the persons
      * @return the filter data dto
      */
-    public FilterDataDto buildCityFacets(List<Person> persons) {
+    public FilterDataDto buildCityFacets(List<PersonDto> persons) {
         return FilterDataDto.builder()
                 .filterName(CITY)
                 .value(persons.stream()
@@ -136,7 +137,7 @@ public class FilterDataMapper implements IFilterDataMapper {
      * @param persons the persons
      * @return the filter data dto
      */
-    public FilterDataDto buildStateFacets(List<Person> persons) {
+    public FilterDataDto buildStateFacets(List<PersonDto> persons) {
         return FilterDataDto.builder()
                 .filterName(STATE)
                 .value(persons.stream()
@@ -155,13 +156,13 @@ public class FilterDataMapper implements IFilterDataMapper {
      * @param persons the persons
      * @return the filter data dto
      */
-    public FilterDataDto buildPostCodeFacets(List<Person> persons) {
+    public FilterDataDto buildPostCodeFacets(List<PersonDto> persons) {
         return FilterDataDto.builder()
                 .filterName(POSTCODE)
                 .value(persons.stream()
                         .flatMap(person -> person.getAddress().stream()
                                 .filter(address -> Strings.isNotBlank(address.getPostCode()))
-                                .map(address -> address.getPostCode()))
+                                .map(AddressDto::getPostCode))
                         .distinct()
                         .collect(Collectors.toList()))
                 .filterType(SELECT)
@@ -174,7 +175,7 @@ public class FilterDataMapper implements IFilterDataMapper {
      * @param persons the persons
      * @return the filter data dto
      */
-    public FilterDataDto buildCountyCode(List<Person> persons) {
+    public FilterDataDto buildCountyCode(List<PersonDto> persons) {
         return FilterDataDto.builder()
                 .filterName(COUNTRY_CODE)
                 .value(persons.stream()
@@ -193,11 +194,11 @@ public class FilterDataMapper implements IFilterDataMapper {
      * @param persons the persons
      * @return the filter data dto
      */
-    public FilterDataDto buildGenderFacets(List<Person> persons) {
+    public FilterDataDto buildGenderFacets(List<PersonDto> persons) {
         return FilterDataDto.builder()
                 .filterName(GENDER)
                 .value(persons.stream()
-                        .map(person -> person.getGender())
+                        .map(PersonDto::getGender)
                         .distinct()
                         .collect(Collectors.toList()))
                 .filterType(SELECT)
@@ -210,7 +211,7 @@ public class FilterDataMapper implements IFilterDataMapper {
      * @param persons the persons
      * @return the filter data dto
      */
-    public FilterDataDto buildDateOfBirthFacets(List<Person> persons) {
+    public FilterDataDto buildDateOfBirthFacets(List<PersonDto> persons) {
         return FilterDataDto.builder()
                 .filterName(DATE_OF_BIRTH)
                 .value(persons.stream()

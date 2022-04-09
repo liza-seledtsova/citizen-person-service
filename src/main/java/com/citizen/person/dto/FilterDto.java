@@ -1,6 +1,5 @@
 package com.citizen.person.dto;
 
-import com.citizen.person.entity.Person;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -15,10 +14,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class FilterDto implements Serializable {
     @JsonProperty
-    @NonNull
-    private PageImpl<Person> result;
+    private PageImpl<PersonDto> result;
     @JsonProperty
     @NonNull
     private List<FilterDataDto> filterDataDto;

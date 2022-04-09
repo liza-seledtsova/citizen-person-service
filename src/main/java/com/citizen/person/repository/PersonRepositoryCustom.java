@@ -1,7 +1,7 @@
 package com.citizen.person.repository;
 
 import com.citizen.person.dto.FilterDataDto;
-import com.citizen.person.entity.Person;
+import com.citizen.person.dto.PersonDto;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
@@ -19,5 +19,5 @@ public interface PersonRepositoryCustom {
      * @param pageSize the page size
      * @return the list person
      */
-    List<Person> filter(List<FilterDataDto> filter, Sort sort, long offSet, int pageSize);
+    List<PersonDto> filter(List<FilterDataDto> filter, Sort sort, long offSet, int pageSize);
 }

@@ -1,9 +1,6 @@
 package com.citizen.person.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,7 +10,9 @@ import java.util.List;
  * The person entity.
  */
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,7 +25,7 @@ public class Person {
     @Column(columnDefinition = "varchar(1)")
     private String gender;
     private Date dateOfBirth;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name="person_address")
     private List<Address> address;
 

@@ -1,10 +1,14 @@
 package com.citizen.person.repository.impl;
 
 import com.citizen.person.dto.FilterDataDto;
+import com.citizen.person.dto.PersonDto;
 import com.citizen.person.entity.Person;
+import com.citizen.person.mapper.IPersonMapper;
 import com.citizen.person.repository.PersonRepositoryCustom;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -22,14 +26,16 @@ import static org.springframework.data.jpa.repository.query.QueryUtils.toOrders;
 
 @Repository
 @Slf4j
+@RequiredArgsConstructor
 public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
 
     @PersistenceContext
     private EntityManager entityManager;
-    private final static String UNDER_SCORE = "_";
+    private final IPersonMapper personMapper;
+    private static final String UNDER_SCORE = "_";
 
     @Override
-    public List<Person> filter(List<FilterDataDto> filter, Sort sort, long offSet, int pageSize) {
+    public List<PersonDto> filter(List<FilterDataDto> filter, Sort sort, long offSet, int pageSize) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Person> criteriaQuery = criteriaBuilder.createQuery(Person.class);
         Root<Person> root = criteriaQuery.from(Person.class);
@@ -41,7 +47,7 @@ public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
         typedQuery.setFirstResult((int) offSet);
         typedQuery.setMaxResults(pageSize);
         log.info("Search hints with filter data: {}", total);
-        return  total > offSet ? typedQuery.getResultList() : Collections.<Person>emptyList();
+        return  total > offSet ? typedQuery.getResultList().stream().map(personMapper::toDto).collect(Collectors.toList()) : Collections.emptyList();
     }
 
     private void predicateRootBuilder(CriteriaBuilder builder, List<FilterDataDto> filterData, Root<Person> root, CriteriaQuery<Person> criteriaQuery) {
@@ -72,7 +78,7 @@ public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
                 nestedPredicate = nestedWildcardQuery(builder, root, filterProperties, query, nestedPredicate, criteriaQuery);
                 break;
             default:
-                log.warn("Invalid type of nesting filer: {}, field name", filterProperties.getFilterName().getType(), filterProperties.getFilterName());
+                log.warn("Invalid type of nesting filer: {}, field name {}", filterProperties.getFilterName().getType(), filterProperties.getFilterName());
         }
         return nestedPredicate;
 
@@ -103,11 +109,9 @@ public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
     }
 
     private Join<Object, Object> joinBuilder(Root<Person> root, List<String> nestedEntity) {
-        Join<Object, Object> join = root.join(nestedEntity.get(0));
-        nestedEntity.stream().skip(1).forEach(entity -> {
-            join.join(entity);
-        });
-        return join;
+        Join<Object, Object> joinNestedEntity = root.join(nestedEntity.get(0));
+        nestedEntity.stream().skip(1).forEach(joinNestedEntity::join);
+        return joinNestedEntity;
     }
 
     private Predicate wildcardQuery(CriteriaBuilder builder, Root<Person> root, FilterDataDto param, List<String> query, Predicate nestedPredicate, CriteriaQuery<Person> criteriaQuery) {

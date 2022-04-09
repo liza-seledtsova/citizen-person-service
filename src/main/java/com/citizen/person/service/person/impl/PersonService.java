@@ -3,8 +3,11 @@ package com.citizen.person.service.person.impl;
 import com.citizen.person.dto.FilterDataDto;
 import com.citizen.person.dto.FilterDto;
 import com.citizen.person.dto.PageImpl;
+import com.citizen.person.dto.PersonDto;
 import com.citizen.person.entity.Person;
+import com.citizen.person.exception.EntityNotFoundException;
 import com.citizen.person.mapper.IFilterDataMapper;
+import com.citizen.person.mapper.IPersonMapper;
 import com.citizen.person.repository.PersonRepository;
 import com.citizen.person.service.person.IPersonService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,7 +19,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.citizen.person.enums.NameEntity.CITY;
+import static com.citizen.person.enums.NameEntity.PERSON;
 
 /**
  * The person service.
@@ -29,10 +36,13 @@ public class PersonService implements IPersonService {
     private final PersonRepository personRepository;
     private final IFilterDataMapper filterDataMapper;
     private final ObjectMapper objectMapper;
+    private final IPersonMapper personMapper;
 
     @Override
-    public List<Person> getAll() {
-        List<Person> persons = personRepository.findAll();
+    public List<PersonDto> getAll() {
+        List<PersonDto> persons = personRepository.findAll().stream()
+                .map(personMapper::toDto)
+                .collect(Collectors.toList());
         if (log.isDebugEnabled()) {
             log.debug("List of person: {}", persons.stream()
                     .map(person -> person.getFirstName() + " " + person.getSurname())
@@ -42,7 +52,37 @@ public class PersonService implements IPersonService {
     }
 
     @Override
-    public List<FilterDataDto> generateFilerData(List<Person> persons) {
+    public void save(PersonDto newPerson) {
+        personRepository.save(personMapper.toEntity(newPerson));
+        if (log.isDebugEnabled()) {
+            log.debug("New person saved {}", newPerson.getFirstName() + " " + newPerson.getSurname());
+        }
+    }
+
+    @Override
+    public void delete(Long personId) {
+        personRepository.deleteById(getPersonById(personId)
+                .orElseThrow(() -> new EntityNotFoundException(personId, CITY.name()))
+                .getId());
+        if (log.isDebugEnabled()) {
+            log.debug("Person deleted {}", personId);
+        }
+    }
+
+    @Override
+    public PersonDto getById(Long id) {
+        return personMapper.toDto(getPersonById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id, PERSON.name())));
+    }
+
+    @Override
+    public Optional<Person> getPersonById(Long id) {
+        return personRepository.findById(id);
+    }
+
+
+    @Override
+    public List<FilterDataDto> generateFilerData(List<PersonDto> persons) {
         return filterDataMapper.generateFilterFacetValue(persons);
     }
 
@@ -59,8 +99,13 @@ public class PersonService implements IPersonService {
         return filterDto;
     }
 
-    public PageImpl<Person> filterData(List<FilterDataDto> filter, Pageable pageable) {
-        List<Person> persons = personRepository.filter(filter, pageable.isPaged() ? pageable.getSort() : Sort.unsorted(), pageable.getOffset(), pageable.getPageSize());
+    public PageImpl<PersonDto> filterData(List<FilterDataDto> filter, Pageable pageable) {
+        List<PersonDto> persons = personRepository.filter(filter, pageable.isPaged() ? pageable.getSort() : Sort.unsorted(), pageable.getOffset(), pageable.getPageSize());
+        if(log.isDebugEnabled()){
+            log.debug("List of filtered persons: {}", persons.stream()
+                    .map(person -> person.getFirstName() + " " + person.getSurname())
+                    .collect(Collectors.joining()));
+        }
         return new PageImpl(persons, pageable.getPageNumber(), pageable.getPageSize(), new ObjectMapper().valueToTree(pageable), persons.size());
     }
 }
