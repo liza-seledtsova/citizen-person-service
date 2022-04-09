@@ -1,52 +1,28 @@
-
-
-# FilterDataDto
+# OpenapiClient::FilterDataDto
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**sorting** | [**SortingEnum**](#SortingEnum) | sort query |  [optional]
-**value** | **List&lt;String&gt;** |  |  [optional]
-**select** | **List&lt;String&gt;** |  |  [optional]
-**filterName** | [**FilterNameEnum**](#FilterNameEnum) | name field to filter entry |  [optional]
-**filterType** | [**FilterTypeEnum**](#FilterTypeEnum) | type of filer for building query |  [optional]
-**groupBy** | **Boolean** |  |  [optional]
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **sorting** | **String** | enum to sort value | [optional] |
+| **value** | **Array&lt;String&gt;** | list of avaliable value filed to sample data from entry | [optional] |
+| **select** | **Array&lt;String&gt;** | list of selected value from list of value for building query | [optional] |
+| **filter_name** | **String** | name of field to filter data on this field | [optional] |
+| **filter_type** | **String** | filter depends on the data format.Select - string value(name, surname). Range - number format(price, date) | [optional] |
+| **group_by** | **Boolean** |  | [optional] |
 
+## Example
 
+```ruby
+require 'openapi_client'
 
-## Enum: SortingEnum
-
-Name | Value
----- | -----
-ASC | &quot;ASC&quot;
-DESC | &quot;DESC&quot;
-
-
-
-## Enum: FilterNameEnum
-
-Name | Value
----- | -----
-FIRST_NAME | &quot;FIRST_NAME&quot;
-SURNAME | &quot;SURNAME&quot;
-ADDRESS1 | &quot;ADDRESS1&quot;
-ADDRESS2 | &quot;ADDRESS2&quot;
-CITY | &quot;CITY&quot;
-STATE | &quot;STATE&quot;
-POSTCODE | &quot;POSTCODE&quot;
-COUNTRY_CODE | &quot;COUNTRY_CODE&quot;
-GENDER | &quot;GENDER&quot;
-DATE_OF_BIRTH | &quot;DATE_OF_BIRTH&quot;
-
-
-
-## Enum: FilterTypeEnum
-
-Name | Value
----- | -----
-SELECT | &quot;SELECT&quot;
-RANGE | &quot;RANGE&quot;
-
-
+instance = OpenapiClient::FilterDataDto.new(
+  sorting: null,
+  value: [&quot;Glasgow&quot;,&quot;Southend&quot;],
+  select: [&quot;Glasgow&quot;,&quot;Southend&quot;],
+  filter_name: CITY,
+  filter_type: SELECT,
+  group_by: false
+)
+```
 
