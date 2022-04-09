@@ -48,7 +48,7 @@ public class CityController {
      * @param city the city
      * @return the response entity
      */
-    @PostMapping("/country")
+    @PostMapping("/city")
     public ResponseEntity createCity(@RequestBody CityDto city) {
         cityService.save(city);
         return ResponseEntity
@@ -57,12 +57,12 @@ public class CityController {
     }
 
     /**
-     * Update address response entity.
+     * Update city response entity.
      *
      * @param city the city
      * @return the response entity
      */
-    @PutMapping("/country")
+    @PutMapping("/city")
     public ResponseEntity updateCity(@RequestBody CityDto city) {
         cityService.update(city);
         return ResponseEntity

@@ -57,6 +57,12 @@ public class CountryController {
                 .build();
     }
 
+    /**
+     * Update country response entity.
+     *
+     * @param country the country
+     * @return the response entity
+     */
     @PutMapping("/country")
     public ResponseEntity updateCountry(@RequestBody CountryDto country) {
         countryService.update(country);
