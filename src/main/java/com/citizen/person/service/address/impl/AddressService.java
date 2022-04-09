@@ -49,6 +49,13 @@ public class AddressService implements IAddressService {
     }
 
     @Override
+    public void update(AddressDto updateAddressDto){
+        Long id = updateAddressDto.getId();
+        addressRepository.save(addressMapper.merge(updateAddressDto,addressRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id, ADDRESS.name()))));
+    }
+
+    @Override
     public void delete(Long addressId) {
         addressRepository.deleteById(getAddressById(addressId)
                 .orElseThrow(() -> new EntityNotFoundException(addressId, ADDRESS.name()))

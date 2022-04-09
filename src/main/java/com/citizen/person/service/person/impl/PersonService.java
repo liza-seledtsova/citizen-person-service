@@ -1,9 +1,6 @@
 package com.citizen.person.service.person.impl;
 
-import com.citizen.person.dto.FilterDataDto;
-import com.citizen.person.dto.FilterDto;
-import com.citizen.person.dto.PageImpl;
-import com.citizen.person.dto.PersonDto;
+import com.citizen.person.dto.*;
 import com.citizen.person.entity.Person;
 import com.citizen.person.exception.EntityNotFoundException;
 import com.citizen.person.mapper.IFilterDataMapper;
@@ -57,6 +54,13 @@ public class PersonService implements IPersonService {
         if (log.isDebugEnabled()) {
             log.debug("New person saved {}", newPerson.getFirstName() + " " + newPerson.getSurname());
         }
+    }
+
+    @Override
+    public void update(PersonDto updatePerson){
+        Long id = updatePerson.getId();
+        personRepository.save(personMapper.merge(updatePerson,personRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id, PERSON.name()))));
     }
 
     @Override

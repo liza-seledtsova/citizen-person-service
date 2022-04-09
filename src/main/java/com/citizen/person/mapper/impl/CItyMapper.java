@@ -24,4 +24,10 @@ public class CItyMapper implements ICityMapper {
     public CityDto toDto(City entity) {
         return Objects.isNull(entity) ? null : mapper.map(entity, CityDto.class);
     }
+
+    @Override
+    public City merge(CityDto dto, City entity) {
+        mapper.map(dto, entity);
+        return entity;
+    }
 }

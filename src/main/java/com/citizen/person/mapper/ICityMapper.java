@@ -23,4 +23,6 @@ public interface ICityMapper {
      * @return the city dto
      */
     CityDto toDto(City entity);
+
+    City merge(CityDto dto, City entity);
 }

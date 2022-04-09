@@ -24,4 +24,10 @@ public class CountryMapper implements ICountryMapper {
     public CountryDto toDto(Country entity) {
         return Objects.isNull(entity) ? null : mapper.map(entity, CountryDto.class);
     }
+
+    @Override
+    public Country merge(CountryDto dto, Country entity) {
+        mapper.map(dto, entity);
+        return entity;
+    }
 }

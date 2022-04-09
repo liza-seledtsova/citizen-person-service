@@ -23,4 +23,6 @@ public interface IPersonMapper {
      * @return the person dto
      */
     PersonDto toDto(Person entity);
+
+    Person merge(PersonDto dto, Person entity);
 }

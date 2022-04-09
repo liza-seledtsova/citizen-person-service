@@ -29,6 +29,13 @@ public interface IPersonService {
     void save(PersonDto newPerson);
 
     /**
+     * Update.
+     *
+     * @param updatePerson the update person
+     */
+    void update(PersonDto updatePerson);
+
+    /**
      * Delete.
      *
      * @param personId the person id

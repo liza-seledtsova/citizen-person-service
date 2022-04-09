@@ -38,6 +38,20 @@ public class CountryServiceTest {
     private CountryService countryService;
 
     /**
+     * Test update country not found.
+     */
+    @Test
+    void testUpdateCountryNotFound() {
+        CountryDto updateCountryDto = CountryDto.builder()
+                .id(1L)
+                .countryCode("UA")
+                .build();
+        when(countryRepository.findById(updateCountryDto.getId())).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> countryService.update(updateCountryDto));
+    }
+
+    /**
      * Test get country by id.
      */
     @Test

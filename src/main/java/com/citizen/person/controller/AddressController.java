@@ -1,7 +1,6 @@
 package com.citizen.person.controller;
 
 import com.citizen.person.dto.AddressDto;
-import com.citizen.person.entity.Address;
 import com.citizen.person.service.address.IAddressService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -53,6 +52,20 @@ public class AddressController {
     @PostMapping("/address")
     public ResponseEntity createAddress(@RequestBody AddressDto address) {
         addressService.save(address);
+        return ResponseEntity
+                .ok()
+                .build();
+    }
+
+    /**
+     * Update address response entity.
+     *
+     * @param address the address
+     * @return the response entity
+     */
+    @PutMapping("/address")
+    public ResponseEntity updateAddress(@RequestBody AddressDto address) {
+        addressService.update(address);
         return ResponseEntity
                 .ok()
                 .build();

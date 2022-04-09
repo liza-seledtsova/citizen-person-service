@@ -14,16 +14,16 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 
+/**
+ * The type State service test.
+ */
 @ContextConfiguration(classes = {StateService.class})
 @ExtendWith(SpringExtension.class)
 public class StateServiceTest {
@@ -37,19 +37,46 @@ public class StateServiceTest {
     @Autowired
     private StateService stateService;
 
+    /**
+     * Test update not found.
+     */
+    @Test
+    void testUpdateNotFound() {
+        StateDto updateState = StateDto.builder()
+                .id(1L)
+                .name("test")
+                .country(CountryDto.builder()
+                        .id(1L)
+                        .countryCode("UK")
+                        .build())
+                .build();
+
+        when(stateRepository.findById(updateState.getId())).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> stateService.update(updateState));
+    }
+
+    /**
+     * Test get state by id not found.
+     */
     @Test
     void testGetStateByIdNotFound() {
         when(stateRepository.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, () -> stateService.getById(anyLong()));
     }
 
-
+    /**
+     * Test get by id not found.
+     */
     @Test
     void testGetByIdNotFound() {
         when(stateRepository.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, () -> stateService.getById(anyLong()));
     }
 
+    /**
+     * Test save.
+     */
     @Test
     void testSave() {
         StateDto stateDto = StateDto.builder()
@@ -77,6 +104,9 @@ public class StateServiceTest {
         verify(stateRepository, times(1)).save(state);
     }
 
+    /**
+     * Test delete.
+     */
     @Test
     void testDelete() {
         Long id = 1L;
@@ -88,6 +118,9 @@ public class StateServiceTest {
         verify(stateRepository, times(1)).deleteById(id);
     }
 
+    /**
+     * Test delete not found.
+     */
     @Test
     void testDeleteNotFound() {
         when(stateRepository.findById(anyLong())).thenReturn(Optional.empty());

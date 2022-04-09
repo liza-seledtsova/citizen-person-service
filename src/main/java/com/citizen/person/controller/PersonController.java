@@ -75,6 +75,20 @@ public class PersonController {
     }
 
     /**
+     * Update person response entity.
+     *
+     * @param person the person
+     * @return the response entity
+     */
+    @PutMapping("/persons")
+    public ResponseEntity updatePerson(@RequestBody PersonDto person) {
+        personService.update(person);
+        return ResponseEntity
+                .ok()
+                .build();
+    }
+
+    /**
      * Delete person response entity.
      *
      * @param personsId the persons id

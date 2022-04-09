@@ -24,4 +24,10 @@ public class AddressMapper implements IAddressMapper {
     public AddressDto toDto(Address entity) {
         return Objects.isNull(entity) ? null : mapper.map(entity, AddressDto.class);
     }
+
+    @Override
+    public Address merge(AddressDto dto, Address entity) {
+        mapper.map(dto, entity);
+        return entity;
+    }
 }

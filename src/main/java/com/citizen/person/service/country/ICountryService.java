@@ -27,6 +27,13 @@ public interface ICountryService {
 
 
     /**
+     * Update.
+     *
+     * @param updateCountryDto the update country dto
+     */
+    void update(CountryDto updateCountryDto);
+
+    /**
      * Delete.
      *
      * @param id the id

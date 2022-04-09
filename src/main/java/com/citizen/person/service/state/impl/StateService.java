@@ -15,8 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.citizen.person.enums.NameEntity.COUNTRY;
-import static com.citizen.person.enums.NameEntity.STATE;
+import static com.citizen.person.enums.NameEntity.*;
 
 /**
  * The person service.
@@ -49,6 +48,15 @@ public class StateService implements IStateService {
             log.debug("The sate - {} created.", newState.getName());
         }
     }
+
+
+    @Override
+    public void update(StateDto updateState){
+        Long id = updateState.getId();
+        stateRepository.save(stateMapper.merge(updateState,stateRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id, STATE.name()))));
+    }
+
 
     @Override
     @Transactional

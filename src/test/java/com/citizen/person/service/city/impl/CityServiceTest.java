@@ -40,6 +40,20 @@ public class CityServiceTest {
     private CityService cityService;
 
     /**
+     * Test update city not found.
+     */
+    @Test
+    void testUpdateCityNotFound() {
+        CityDto updateCityDto = CityDto.builder()
+                .id(1L)
+                .name("test")
+                .build();
+        when(cityRepository.findById(updateCityDto.getId())).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> cityService.update(updateCityDto));
+    }
+
+    /**
      * Test get by id not found.
      */
     @Test

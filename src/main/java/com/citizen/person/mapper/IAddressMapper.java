@@ -23,4 +23,6 @@ public interface IAddressMapper{
      * @return the address dto
      */
     AddressDto toDto(Address entity);
+
+    Address merge(AddressDto dto, Address entity);
 }

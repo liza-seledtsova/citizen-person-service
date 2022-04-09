@@ -23,7 +23,6 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 /**
@@ -46,6 +45,40 @@ class PersonServiceTest {
 
     @Autowired
     private PersonService personService;
+
+    /**
+     * Test update person not found.
+     */
+    @Test
+    void testUpdatePersonNotFound() {
+        PersonDto updatePerson = PersonDto.builder()
+                .id(1L)
+                .firstName("John")
+                .surname("Smith")
+                .gender("M")
+                .dateOfBirth(new Date())
+                .address(Collections.singletonList(AddressDto.builder()
+                        .id(1L)
+                        .city(CityDto.builder()
+                                .id(1L)
+                                .name("London")
+                                .state(StateDto.builder()
+                                        .id(1L)
+                                        .name("test")
+                                        .country(CountryDto.builder()
+                                                .id(1L)
+                                                .countryCode("UK")
+                                                .build())
+                                        .build())
+                                .build())
+                        .address1("Street 1")
+                        .build()))
+                .build();
+
+        when(personRepository.findById(updatePerson.getId())).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> personService.update(updatePerson));
+    }
 
     /**
      * Test filter data.

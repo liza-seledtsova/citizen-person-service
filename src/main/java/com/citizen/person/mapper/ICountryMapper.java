@@ -23,4 +23,6 @@ public interface ICountryMapper {
      * @return the country dto
      */
     CountryDto toDto(Country entity);
+
+    Country merge(CountryDto dto, Country entity);
 }

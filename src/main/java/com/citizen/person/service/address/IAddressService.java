@@ -23,6 +23,8 @@ public interface IAddressService {
      */
     void save(AddressDto address);
 
+    void update(AddressDto updateAddressDto);
+
     /**
      * Delete.
      *

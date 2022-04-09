@@ -59,6 +59,20 @@ public class StateController {
     }
 
     /**
+     * Update person response entity.
+     *
+     * @param state the state
+     * @return the response entity
+     */
+    @PutMapping("/state")
+    public ResponseEntity updatePerson(@RequestBody StateDto state) {
+        stateService.update(state);
+        return ResponseEntity
+                .ok()
+                .build();
+    }
+
+    /**
      * Delete state response entity.
      *
      * @param stateId the state id

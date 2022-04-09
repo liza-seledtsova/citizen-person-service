@@ -27,6 +27,13 @@ public interface IStateService {
 
 
     /**
+     * Update.
+     *
+     * @param updateState the update state
+     */
+    void update(StateDto updateState);
+
+    /**
      * Delete.
      *
      * @param id the id

@@ -24,4 +24,10 @@ public class PersonMapper implements IPersonMapper {
     public PersonDto toDto(Person entity) {
         return Objects.isNull(entity) ? null : mapper.map(entity, PersonDto.class);
     }
+
+    @Override
+    public Person merge(PersonDto dto, Person entity) {
+        mapper.map(dto, entity);
+        return entity;
+    }
 }

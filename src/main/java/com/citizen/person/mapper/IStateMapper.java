@@ -23,4 +23,6 @@ public interface IStateMapper {
      * @return the state dto
      */
     StateDto toDto(State entity);
+
+    State merge(StateDto dto, State entity);
 }

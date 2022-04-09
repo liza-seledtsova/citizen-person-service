@@ -24,4 +24,10 @@ public class StateMapper implements IStateMapper {
     public StateDto toDto(State entity) {
         return Objects.isNull(entity) ? null : mapper.map(entity, StateDto.class);
     }
+
+    @Override
+    public State merge(StateDto dto, State entity) {
+        mapper.map(dto, entity);
+        return entity;
+    }
 }

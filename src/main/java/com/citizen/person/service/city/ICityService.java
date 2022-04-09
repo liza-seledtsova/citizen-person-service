@@ -23,6 +23,13 @@ public interface ICityService {
     void save(CityDto city);
 
     /**
+     * Update.
+     *
+     * @param updateCityDto the update city dto
+     */
+    void update(CityDto updateCityDto);
+
+    /**
      * Delete.
      *
      * @param cityId the city

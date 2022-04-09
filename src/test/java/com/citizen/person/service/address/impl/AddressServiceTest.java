@@ -43,6 +43,27 @@ public class AddressServiceTest {
     private AddressService addressService;
 
     /**
+     * Test update address not found.
+     */
+    @Test
+    void testUpdateAddressNotFound() {
+        AddressDto addressDto = AddressDto.builder()
+                .id(1L)
+                .address1("address1")
+                .address2("address2")
+                .postCode("postCode")
+                .city(CityDto.builder()
+                        .id(1L)
+                        .name("name")
+                        .build())
+                .build();
+
+        when(addressRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> addressService.update(addressDto));
+    }
+
+    /**
      * Test get address by id.
      */
     @Test

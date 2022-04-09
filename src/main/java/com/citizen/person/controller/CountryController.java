@@ -57,6 +57,14 @@ public class CountryController {
                 .build();
     }
 
+    @PutMapping("/country")
+    public ResponseEntity updateCountry(@RequestBody CountryDto country) {
+        countryService.update(country);
+        return ResponseEntity
+                .ok()
+                .build();
+    }
+
     /**
      * Delete state response entity.
      *
