@@ -19,19 +19,13 @@ Building the person service:
 
 gradle bootJar
 ```
-```
-//Run the project
 
-cd build/distribution/bin
-
-start.sh
-```
 ```
 //Run the project with "java" command
 
-cd build/distribution/libs
+cd build//libs
 
-java -jar access-provider-{app-version}.jar --port=8081
+java -jar citizen-person-service-0.0.1-SNAPSHOT.jar --port=8081
 ```
 #### 3) Open swagger ui - http://localhost:8081/swagger-ui/index.html#/person-controller/getPersonsFiltered
 
