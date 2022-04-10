@@ -7,6 +7,7 @@ import com.citizen.person.entity.State;
 import com.citizen.person.exception.EntityNotFoundException;
 import com.citizen.person.mapper.ICityMapper;
 import com.citizen.person.repository.CityRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,19 +72,19 @@ public class CityServiceTest {
     void testSave() {
         CityDto cityDto = CityDto.builder()
                 .id(1L)
-                .name("Kiev")
+                .name("Leeds")
                 .state(StateDto.builder()
                         .id(1L)
-                        .name("Ukraine")
+                        .name("W Yorks")
                         .build())
                 .build();
 
         City city = City.builder()
                 .id(1L)
-                .name("Kiev")
+                .name("Leeds")
                 .state(State.builder()
                         .id(1L)
-                        .name("Ukraine")
+                        .name("W Yorks")
                         .build())
                 .build();
 
@@ -101,11 +102,11 @@ public class CityServiceTest {
     void testDelete() {
         CityDto cityDto = new CityDto();
         cityDto.setId(1L);
-        cityDto.setName("Kiev");
+        cityDto.setName("London");
 
         City city = new City();
         city.setId(1L);
-        city.setName("Kiev");
+        city.setName("London");
 
         when(cityRepository.findById(1L)).thenReturn(Optional.of(city));
         when(cityMapper.toEntity(cityDto)).thenReturn(city);
@@ -146,6 +147,6 @@ public class CityServiceTest {
 
         List<CityDto> result = cityService.getAll();
 
-        assertEquals(3, result.size());
+        Assertions.assertEquals(3, result.size());
     }
 }
