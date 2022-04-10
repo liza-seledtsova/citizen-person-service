@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -154,42 +152,6 @@ class PersonServiceTest {
     }
 
     /**
-     * Test get by id.
-     */
-    @Test
-    void testGetById() {
-        PersonDto personDto = PersonDto.builder()
-                .id(1L)
-                .firstName("John")
-                .surname("Smith")
-                .gender("male")
-                .dateOfBirth(new Date())
-                .address(Collections.singletonList(AddressDto.builder()
-                        .id(1L)
-                        .city(CityDto.builder()
-                                .id(1L)
-                                .name("London")
-                                .state(StateDto.builder()
-                                        .id(1L)
-                                        .name("test")
-                                        .country(CountryDto.builder()
-                                                .id(1L)
-                                                .countryCode("UK")
-                                                .build())
-                                        .build())
-                                .build())
-                                .address1("Street 1")
-                        .build()))
-                .build();
-
-                        when(personRepository.findById(1L)).thenReturn(Optional.of(personMapper.toEntity(personDto)));
-
-        PersonDto result = personService.getById(1L);
-
-        assertEquals(personDto, result);
-    }
-
-    /**
      * Test get by id person not found.
      */
     @Test
@@ -197,15 +159,6 @@ class PersonServiceTest {
         Long id = 1L;
         when(personRepository.findById(id)).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, () -> personService.getById(id));
-    }
-
-    /**
-     * Test delete.
-     */
-    @Test
-    void testDelete() {
-        personService.delete(1L);
-        verify(personRepository, times(1)).deleteById(1L);
     }
 
     /**
