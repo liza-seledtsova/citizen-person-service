@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.citizen.person.enums.NameEntity.CITY;
 import static com.citizen.person.enums.NameEntity.COUNTRY;
 
 /**
@@ -50,9 +49,9 @@ public class CountryService implements ICountryService {
     }
 
     @Override
-    public void update(CountryDto updateCountryDto){
+    public void update(CountryDto updateCountryDto) {
         Long id = updateCountryDto.getId();
-        countryRepository.save(countryMapper.merge(updateCountryDto,countryRepository.findById(id)
+        countryRepository.save(countryMapper.merge(updateCountryDto, countryRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, COUNTRY.name()))));
         if (log.isDebugEnabled()) {
             log.debug("The country - {}  was updated.", updateCountryDto.getCountryCode());

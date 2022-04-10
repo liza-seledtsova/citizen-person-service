@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class FilterDto<T>{
+public class FilterDto<T> {
     @JsonProperty
     private PageImpl<T> result;
     @JsonProperty

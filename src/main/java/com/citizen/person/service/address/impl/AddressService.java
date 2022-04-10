@@ -49,9 +49,9 @@ public class AddressService implements IAddressService {
     }
 
     @Override
-    public void update(AddressDto updateAddressDto){
+    public void update(AddressDto updateAddressDto) {
         Long id = updateAddressDto.getId();
-        addressRepository.save(addressMapper.merge(updateAddressDto,addressRepository.findById(id)
+        addressRepository.save(addressMapper.merge(updateAddressDto, addressRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, ADDRESS.name()))));
         if (log.isDebugEnabled()) {
             log.debug("The address - {} was updated.", updateAddressDto.getId());

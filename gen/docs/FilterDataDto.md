@@ -8,7 +8,8 @@
 | **value** | **Array&lt;String&gt;** | list of avaliable value filed to sample data from entry | [optional] |
 | **select** | **Array&lt;String&gt;** | list of selected value from list of value for building query | [optional] |
 | **filter_name** | **String** | name of field to filter data on this field | [optional] |
-| **filter_type** | **String** | filter depends on the data format.Select - string value(name, surname). Range - number format(price, date) | [optional] |
+| **filter_type** | **
+String** | filter depends on the data format.Select - string value(name, surname). Range - number format(price, date) | [optional] |
 | **group_by** | **Boolean** |  | [optional] |
 
 ## Example

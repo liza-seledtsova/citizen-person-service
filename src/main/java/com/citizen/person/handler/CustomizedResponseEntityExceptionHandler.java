@@ -1,7 +1,6 @@
 package com.citizen.person.handler;
 
 import com.citizen.person.exception.EntityNotFoundException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;

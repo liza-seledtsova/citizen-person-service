@@ -10,7 +10,6 @@ All URIs are relative to *http://localhost:8081*
 | [**get_all_address**](AddressApi.md#get_all_address) | **GET** /api/v1/address |  |
 | [**update_address**](AddressApi.md#update_address) | **PUT** /api/v1/address |  |
 
-
 ## create_address
 
 > String create_address(address_dto)
@@ -73,7 +72,6 @@ No authorization required
 
 - **Content-Type**: application/json
 - **Accept**: */*
-
 
 ## delete_address
 
@@ -138,7 +136,6 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-
 ## get_address_by_id
 
 > String get_address_by_id(address_id)
@@ -202,7 +199,6 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-
 ## get_all_address
 
 > String get_all_address
@@ -262,7 +258,6 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: */*
-
 
 ## update_address
 

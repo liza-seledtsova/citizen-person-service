@@ -26,7 +26,7 @@ public class Person {
     private String gender;
     private Date dateOfBirth;
     @ManyToMany(cascade = CascadeType.REMOVE)
-    @JoinTable(name="person_address")
+    @JoinTable(name = "person_address")
     private List<Address> address;
 
 

@@ -21,7 +21,7 @@ public class City {
     private Long id;
     private String name;
     @ManyToOne
-    @JoinColumn(name="state_id", nullable=false, updatable=false)
+    @JoinColumn(name = "state_id", nullable = false, updatable = false)
     private State state;
 
 }

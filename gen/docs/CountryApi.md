@@ -10,7 +10,6 @@ All URIs are relative to *http://localhost:8081*
 | [**get_country_by_id**](CountryApi.md#get_country_by_id) | **GET** /api/v1/country/{countryId} |  |
 | [**update_country**](CountryApi.md#update_country) | **PUT** /api/v1/country |  |
 
-
 ## create_country
 
 > String create_country(country_dto)
@@ -73,7 +72,6 @@ No authorization required
 
 - **Content-Type**: application/json
 - **Accept**: */*
-
 
 ## delete_country
 
@@ -138,7 +136,6 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-
 ## get_all_country
 
 > String get_all_country
@@ -198,7 +195,6 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: */*
-
 
 ## get_country_by_id
 
@@ -262,7 +258,6 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: */*
-
 
 ## update_country
 

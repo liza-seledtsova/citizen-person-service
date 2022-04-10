@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.citizen.person.enums.NameEntity.ADDRESS;
 import static com.citizen.person.enums.NameEntity.CITY;
 
 /**
@@ -50,9 +49,9 @@ public class CityService implements ICityService {
     }
 
     @Override
-    public void update(CityDto updateCityDto){
+    public void update(CityDto updateCityDto) {
         Long id = updateCityDto.getId();
-        cityRepository.save(cityMapper.merge(updateCityDto,cityRepository.findById(id)
+        cityRepository.save(cityMapper.merge(updateCityDto, cityRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, CITY.name()))));
         if (log.isDebugEnabled()) {
             log.debug("The city - {}  was updated.", updateCityDto.getName());

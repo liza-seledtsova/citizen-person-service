@@ -1475,14 +1475,14 @@ components:
             - DESC
         value:
           description: list of avaliable value filed to sample data from entry
-          example: [Glasgow, Southend]
+          example: [ Glasgow, Southend ]
           type: array
           items:
             type: string
         select:
           description: list of selected value from list of value for building query
           type: array
-          example: [Glasgow, Southend]
+          example: [ Glasgow, Southend ]
           items:
             type: string
         filterName:
@@ -1529,7 +1529,7 @@ components:
       type: object
       properties:
         content:
-          example: []
+          example: [ ]
           description: filtering and sorting result
           type: array
           items:

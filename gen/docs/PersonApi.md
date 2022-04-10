@@ -11,7 +11,6 @@ All URIs are relative to *http://localhost:8081*
 | [**get_persons_filtered**](PersonApi.md#get_persons_filtered) | **POST** /api/v1/persons/filter |  |
 | [**update_person**](PersonApi.md#update_person) | **PUT** /api/v1/persons |  |
 
-
 ## create_person
 
 > String create_person(person_dto)
@@ -75,7 +74,6 @@ No authorization required
 - **Content-Type**: application/json
 - **Accept**: */*
 
-
 ## delete_person
 
 > String delete_person(persons_id)
@@ -138,7 +136,6 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: */*
-
 
 ## get_all_persons
 
@@ -205,12 +202,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-
 ## get_person_by_id
 
 > String get_person_by_id(persons_id)
-
-
 
 ### Examples
 
@@ -267,14 +261,14 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-
 ## get_persons_filtered
 
 > String get_persons_filtered(filter_dto)
 
 
 
-Operation to filter and sort data on any filed (firstName, address1, countryCode, state), select multiple values for sampling
+Operation to filter and sort data on any filed (firstName, address1, countryCode, state), select multiple values for
+sampling
 
 ### Examples
 
@@ -330,7 +324,6 @@ No authorization required
 
 - **Content-Type**: application/json
 - **Accept**: */*
-
 
 ## update_person
 

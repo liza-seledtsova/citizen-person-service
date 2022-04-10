@@ -8,6 +8,6 @@ import java.util.List;
 /**
  * The interface City repository.
  */
-public interface CityRepository extends CrudRepository<City,Long> {
+public interface CityRepository extends CrudRepository<City, Long> {
     List<City> findAll();
 }

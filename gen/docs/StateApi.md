@@ -10,7 +10,6 @@ All URIs are relative to *http://localhost:8081*
 | [**get_state_by_id**](StateApi.md#get_state_by_id) | **GET** /api/v1/state/{stateId} |  |
 | [**update_state**](StateApi.md#update_state) | **PUT** /api/v1/state |  |
 
-
 ## create_state
 
 > String create_state(state_dto)
@@ -73,7 +72,6 @@ No authorization required
 
 - **Content-Type**: application/json
 - **Accept**: */*
-
 
 ## delete_state
 
@@ -138,7 +136,6 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-
 ## get_all_state
 
 > String get_all_state
@@ -198,7 +195,6 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: */*
-
 
 ## get_state_by_id
 
@@ -262,7 +258,6 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: */*
-
 
 ## update_state
 

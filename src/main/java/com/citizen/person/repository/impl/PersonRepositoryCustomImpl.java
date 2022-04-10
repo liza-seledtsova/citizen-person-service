@@ -25,10 +25,10 @@ import static com.citizen.person.enums.FilterName.FIRST_NAME;
 @RequiredArgsConstructor
 public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
 
+    private static final String UNDER_SCORE = "_";
+    private final IPersonMapper personMapper;
     @PersistenceContext
     private EntityManager entityManager;
-    private final IPersonMapper personMapper;
-    private static final String UNDER_SCORE = "_";
 
     @Override
     public List<PersonDto> filter(List<FilterDataDto> filter, long offSet, int pageSize) {

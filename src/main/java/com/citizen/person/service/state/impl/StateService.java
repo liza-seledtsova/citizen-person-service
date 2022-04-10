@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.citizen.person.enums.NameEntity.*;
+import static com.citizen.person.enums.NameEntity.COUNTRY;
+import static com.citizen.person.enums.NameEntity.STATE;
 
 /**
  * The person service.
@@ -42,7 +43,7 @@ public class StateService implements IStateService {
     }
 
     @Override
-    public void save(StateDto newState){
+    public void save(StateDto newState) {
         stateRepository.save(stateMapper.toEntity(newState));
         if (log.isDebugEnabled()) {
             log.debug("The sate - {} created.", newState.getName());
@@ -51,9 +52,9 @@ public class StateService implements IStateService {
 
 
     @Override
-    public void update(StateDto updateState){
+    public void update(StateDto updateState) {
         Long id = updateState.getId();
-        stateRepository.save(stateMapper.merge(updateState,stateRepository.findById(id)
+        stateRepository.save(stateMapper.merge(updateState, stateRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, STATE.name()))));
         if (log.isDebugEnabled()) {
             log.debug("The state - {}  was updated.", updateState.getName());
@@ -63,9 +64,9 @@ public class StateService implements IStateService {
 
     @Override
     @Transactional
-    public void delete(Long stateId){
+    public void delete(Long stateId) {
         stateRepository.deleteById(getStateById(stateId)
-          .orElseThrow(() -> new EntityNotFoundException(stateId, COUNTRY.name()))
+                .orElseThrow(() -> new EntityNotFoundException(stateId, COUNTRY.name()))
                 .getId());
         if (log.isDebugEnabled()) {
             log.debug("The sate - {} deleted.", stateId);
@@ -77,6 +78,7 @@ public class StateService implements IStateService {
         return stateMapper.toDto(getStateById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, STATE.name())));
     }
+
     @Override
     public Optional<State> getStateById(Long id) {
         return stateRepository.findById(id);

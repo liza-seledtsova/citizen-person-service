@@ -22,6 +22,6 @@ public class Address {
     private String address2;
     private String postCode;
     @ManyToOne
-    @JoinColumn(name="city_id" ,nullable=false, updatable=false)
+    @JoinColumn(name = "city_id", nullable = false, updatable = false)
     private City city;
 }

@@ -10,7 +10,6 @@ All URIs are relative to *http://localhost:8081*
 | [**get_city_by_id**](CityApi.md#get_city_by_id) | **GET** /api/v1/city/{cityId} |  |
 | [**update_city**](CityApi.md#update_city) | **PUT** /api/v1/city |  |
 
-
 ## create_city
 
 > String create_city(city_dto)
@@ -73,7 +72,6 @@ No authorization required
 
 - **Content-Type**: application/json
 - **Accept**: */*
-
 
 ## delete_city
 
@@ -138,7 +136,6 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-
 ## get_all_city
 
 > String get_all_city
@@ -198,7 +195,6 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: */*
-
 
 ## get_city_by_id
 
@@ -263,14 +259,13 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: */*
 
-
 ## update_city
 
 > String update_city(city_dto)
 
 
 
-Merge  city a from dto to entity
+Merge city a from dto to entity
 
 ### Examples
 

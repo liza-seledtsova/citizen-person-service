@@ -1,6 +1,9 @@
 package com.citizen.person.service.person.impl;
 
-import com.citizen.person.dto.*;
+import com.citizen.person.dto.FilterDataDto;
+import com.citizen.person.dto.FilterDto;
+import com.citizen.person.dto.PageImpl;
+import com.citizen.person.dto.PersonDto;
 import com.citizen.person.entity.Person;
 import com.citizen.person.exception.EntityNotFoundException;
 import com.citizen.person.mapper.IFilterDataMapper;
@@ -11,8 +14,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,12 +58,12 @@ public class PersonService implements IPersonService {
     }
 
     @Override
-    public void update(PersonDto updatePerson){
+    public void update(PersonDto updatePerson) {
         Long id = updatePerson.getId();
-        personRepository.save(personMapper.merge(updatePerson,personRepository.findById(id)
+        personRepository.save(personMapper.merge(updatePerson, personRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, PERSON.name()))));
         if (log.isDebugEnabled()) {
-            log.debug("The person - {}  was updated.", updatePerson.getFirstName() + " "+ updatePerson.getSurname());
+            log.debug("The person - {}  was updated.", updatePerson.getFirstName() + " " + updatePerson.getSurname());
         }
     }
 
@@ -108,7 +109,7 @@ public class PersonService implements IPersonService {
 
     public PageImpl<PersonDto> filterData(List<FilterDataDto> filter, PageImpl pageable) {
         List<PersonDto> persons = personRepository.filter(filter, pageable.getPageable().getOffset(), pageable.getPageable().getPageSize());
-        if(log.isDebugEnabled()){
+        if (log.isDebugEnabled()) {
             log.debug("List of filtered persons: {}", persons.stream()
                     .map(person -> person.getFirstName() + " " + person.getSurname())
                     .collect(Collectors.joining()));

@@ -6,7 +6,7 @@ import com.citizen.person.entity.Address;
 /**
  * The interface Address mapper.
  */
-public interface IAddressMapper{
+public interface IAddressMapper {
 
     /**
      * To entity address.

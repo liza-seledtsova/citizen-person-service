@@ -5,7 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **result** | [**PageImplPerson**](PageImplPerson.md) |  | [optional] |
-| **filter_data_dto** | [**Array&lt;FilterDataDto&gt;**](FilterDataDto.md) | list of filter properties for each field in entry | [optional] |
+| **filter_data_dto** | [**
+Array&lt;FilterDataDto&gt;**](FilterDataDto.md) | list of filter properties for each field in entry | [optional] |
 | **selected_field** | **String** |  | [optional] |
 
 ## Example
