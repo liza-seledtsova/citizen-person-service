@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/cities")
 public class CityController {
 
     private final ICityService cityService;
@@ -23,7 +23,7 @@ public class CityController {
      * @return the all city
      */
     @SneakyThrows
-    @GetMapping("/city")
+    @GetMapping
     public ResponseEntity getAllCity() {
         return ResponseEntity.ok().body(cityService.getAll());
     }
@@ -34,7 +34,7 @@ public class CityController {
      * @param cityId the city id
      * @return the city by id
      */
-    @GetMapping("/city/{cityId}")
+    @GetMapping("/{cityId}")
     public ResponseEntity getCityById(@PathVariable Long cityId) {
         return ResponseEntity
                 .ok()
@@ -48,7 +48,7 @@ public class CityController {
      * @param city the city
      * @return the response entity
      */
-    @PostMapping("/city")
+    @PostMapping
     public ResponseEntity createCity(@RequestBody CityDto city) {
         cityService.save(city);
         return ResponseEntity
@@ -62,7 +62,7 @@ public class CityController {
      * @param city the city
      * @return the response entity
      */
-    @PutMapping("/city")
+    @PutMapping
     public ResponseEntity updateCity(@RequestBody CityDto city) {
         cityService.update(city);
         return ResponseEntity
@@ -76,7 +76,7 @@ public class CityController {
      * @param cityId the city id
      * @return the response entity
      */
-    @DeleteMapping("/city/{cityId}")
+    @DeleteMapping("/{cityId}")
     public ResponseEntity deleteCity(@PathVariable Long cityId) {
         cityService.delete(cityId);
         return ResponseEntity

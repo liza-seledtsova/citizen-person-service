@@ -42,22 +42,6 @@ public class CustomizedResponseEntityExceptionHandler {
     }
 
     /**
-     * Handle entity not found exception error message.
-     *
-     * @param ex      the ex
-     * @param request the request
-     * @return the error message
-     */
-    @ExceptionHandler(JsonProcessingException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ErrorMessage handleEntityNotFoundException(
-            JsonProcessingException ex, WebRequest request) {
-        log.error(ex.getMessage());
-        return new ErrorMessage(
-                HttpStatus.BAD_REQUEST.value(), new Date(System.currentTimeMillis()), ex.getMessage(), request.getDescription(false));
-    }
-
-    /**
      * Handle illegal argument exception error message.
      *
      * @param ex      the ex

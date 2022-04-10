@@ -45,7 +45,7 @@ public class CountryService implements ICountryService {
     public void save(CountryDto newCountry) {
         countryRepository.save(countryMapper.toEntity(newCountry));
         if (log.isDebugEnabled()) {
-            log.debug("The country - {} deleted.", newCountry.getCountryCode());
+            log.debug("The country - {} saved.", newCountry.getCountryCode());
         }
     }
 
@@ -54,6 +54,9 @@ public class CountryService implements ICountryService {
         Long id = updateCountryDto.getId();
         countryRepository.save(countryMapper.merge(updateCountryDto,countryRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, COUNTRY.name()))));
+        if (log.isDebugEnabled()) {
+            log.debug("The country - {}  was updated.", updateCountryDto.getCountryCode());
+        }
     }
 
     @Override

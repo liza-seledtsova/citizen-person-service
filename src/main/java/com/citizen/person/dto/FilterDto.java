@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.data.domain.Sort;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,9 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class FilterDto implements Serializable {
+public class FilterDto<T>{
     @JsonProperty
-    private PageImpl<PersonDto> result;
+    private PageImpl<T> result;
     @JsonProperty
     @NonNull
     private List<FilterDataDto> filterDataDto;

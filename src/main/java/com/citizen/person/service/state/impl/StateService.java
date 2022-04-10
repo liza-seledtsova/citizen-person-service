@@ -34,7 +34,7 @@ public class StateService implements IStateService {
                 .map(stateMapper::toDto)
                 .collect(Collectors.toList());
         if (log.isDebugEnabled()) {
-            log.debug("List of person: {}", state.stream()
+            log.debug("List of sate: {}", state.stream()
                     .map(StateDto::getName)
                     .collect(Collectors.joining()));
         }
@@ -55,6 +55,9 @@ public class StateService implements IStateService {
         Long id = updateState.getId();
         stateRepository.save(stateMapper.merge(updateState,stateRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, STATE.name()))));
+        if (log.isDebugEnabled()) {
+            log.debug("The state - {}  was updated.", updateState.getName());
+        }
     }
 
 

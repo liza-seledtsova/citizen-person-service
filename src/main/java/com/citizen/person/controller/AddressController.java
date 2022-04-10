@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/addresses")
 public class AddressController {
 
     private final IAddressService addressService;
@@ -23,7 +23,7 @@ public class AddressController {
      * @return the all address
      */
     @SneakyThrows
-    @GetMapping("/address")
+    @GetMapping
     public ResponseEntity getAllAddress() {
         return ResponseEntity
                 .ok().
@@ -36,7 +36,7 @@ public class AddressController {
      * @param addressId the address id
      * @return the address by id
      */
-    @GetMapping("/address/{addressId}")
+    @GetMapping("/{addressId}")
     public ResponseEntity getAddressById(@PathVariable Long addressId) {
         return ResponseEntity
                 .ok()
@@ -49,7 +49,7 @@ public class AddressController {
      * @param address the address
      * @return the response entity
      */
-    @PostMapping("/address")
+    @PostMapping
     public ResponseEntity createAddress(@RequestBody AddressDto address) {
         addressService.save(address);
         return ResponseEntity
@@ -63,7 +63,7 @@ public class AddressController {
      * @param address the address
      * @return the response entity
      */
-    @PutMapping("/address")
+    @PutMapping
     public ResponseEntity updateAddress(@RequestBody AddressDto address) {
         addressService.update(address);
         return ResponseEntity
@@ -77,7 +77,7 @@ public class AddressController {
      * @param addressId the address id
      * @return the response entity
      */
-    @DeleteMapping("/address/{addressId}")
+    @DeleteMapping
     public ResponseEntity deleteAddress(@PathVariable Long addressId) {
         addressService.delete(addressId);
         return ResponseEntity.

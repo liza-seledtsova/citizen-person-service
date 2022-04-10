@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/countries")
 public class CountryController {
     private final ICountryService countryService;
 
@@ -23,7 +23,7 @@ public class CountryController {
      * @return the all state
      */
     @SneakyThrows
-    @GetMapping("/country")
+    @GetMapping
     public ResponseEntity getAllCountry() {
         return ResponseEntity
                 .ok()
@@ -36,7 +36,7 @@ public class CountryController {
      * @param countryId the state id
      * @return the state by id
      */
-    @GetMapping("/country/{countryId}")
+    @GetMapping("/{countryId}")
     public ResponseEntity getCountryById(@PathVariable Long countryId) {
         return ResponseEntity
                 .ok()
@@ -49,7 +49,7 @@ public class CountryController {
      * @param country the state
      * @return the response entity
      */
-    @PostMapping("/country")
+    @PostMapping
     public ResponseEntity createCountry(@RequestBody CountryDto country) {
         countryService.save(country);
         return ResponseEntity
@@ -63,7 +63,7 @@ public class CountryController {
      * @param country the country
      * @return the response entity
      */
-    @PutMapping("/country")
+    @PutMapping
     public ResponseEntity updateCountry(@RequestBody CountryDto country) {
         countryService.update(country);
         return ResponseEntity
@@ -77,7 +77,7 @@ public class CountryController {
      * @param countyId the state id
      * @return the response entity
      */
-    @DeleteMapping("/country/{countyId}")
+    @DeleteMapping("/{countyId}")
     public ResponseEntity deleteCountry(@PathVariable Long countyId) {
         countryService.delete(countyId);
         return ResponseEntity

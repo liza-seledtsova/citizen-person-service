@@ -61,6 +61,9 @@ public class PersonService implements IPersonService {
         Long id = updatePerson.getId();
         personRepository.save(personMapper.merge(updatePerson,personRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, PERSON.name()))));
+        if (log.isDebugEnabled()) {
+            log.debug("The person - {}  was updated.", updatePerson.getFirstName() + " "+ updatePerson.getSurname());
+        }
     }
 
     @Override

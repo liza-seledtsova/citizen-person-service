@@ -33,8 +33,7 @@ public class FilterDataMapper implements IFilterDataMapper {
                 buildStateFacets(persons),
                 buildPostCodeFacets(persons),
                 buildDateOfBirthFacets(persons),
-                buildAdditionAddressFacets(persons),
-                buildCityFacets(persons))
+                buildAdditionAddressFacets(persons))
                 : new ArrayList<>();
     }
 

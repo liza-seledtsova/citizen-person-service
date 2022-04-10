@@ -132,14 +132,14 @@ public class CityServiceTest {
     @Test
     void testGetAll() {
         List<City> cities = new ArrayList<>();
-        cities.add(City.builder().id(1L).name("Kiev").build());
-        cities.add(City.builder().id(2L).name("Lviv").build());
-        cities.add(City.builder().id(3L).name("Odessa").build());
+        cities.add(City.builder().id(1L).name("London").build());
+        cities.add(City.builder().id(2L).name("Glasgow").build());
+        cities.add(City.builder().id(3L).name("Manchester").build());
 
         List<CityDto> cityDtos = new ArrayList<>();
-        cityDtos.add(CityDto.builder().id(1L).name("Kiev").build());
-        cityDtos.add(CityDto.builder().id(2L).name("Lviv").build());
-        cityDtos.add(CityDto.builder().id(3L).name("Odessa").build());
+        cityDtos.add(CityDto.builder().id(1L).name("London").build());
+        cityDtos.add(CityDto.builder().id(2L).name("Glasgow").build());
+        cityDtos.add(CityDto.builder().id(3L).name("Manchester").build());
 
         when(cityRepository.findAll()).thenReturn(cities);
         when(cityMapper.toDto(any())).thenReturn(cityDtos.get(0), cityDtos.get(1), cityDtos.get(2));

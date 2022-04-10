@@ -54,6 +54,9 @@ public class CityService implements ICityService {
         Long id = updateCityDto.getId();
         cityRepository.save(cityMapper.merge(updateCityDto,cityRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, CITY.name()))));
+        if (log.isDebugEnabled()) {
+            log.debug("The city - {}  was updated.", updateCityDto.getName());
+        }
     }
 
     @Override

@@ -17,7 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/persons")
 public class PersonController {
 
     private final IPersonService personService;
@@ -29,8 +29,8 @@ public class PersonController {
      * @param pageSize   the page size
      * @return the all persons
      */
-    @GetMapping("/persons")
-    public ResponseEntity getPersonById(@RequestParam int pageNumber, @RequestParam int pageSize) {
+    @GetMapping
+    public ResponseEntity getAllPersons(@RequestParam int pageNumber, @RequestParam int pageSize) {
         List<PersonDto> persons = personService.getAll();
         return ResponseEntity
                 .ok()
@@ -39,7 +39,7 @@ public class PersonController {
                         .filterDataDto(personService.generateFilerData(persons)).build());
     }
 
-    @GetMapping("/persons/{personsId}")
+    @GetMapping("/{personsId}")
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity getPersonById(@PathVariable Long personsId) {
         return ResponseEntity
@@ -53,7 +53,7 @@ public class PersonController {
      * @param filterDto the filter dto
      * @return the persons filtered
      */
-    @PostMapping("/persons/filter")
+    @PostMapping("/filter")
     public ResponseEntity getPersonsFiltered(@RequestBody FilterDto filterDto) {
         Page page = filterDto.getResult();
         return ResponseEntity
@@ -69,7 +69,7 @@ public class PersonController {
      * @param person the person
      * @return the response entity
      */
-    @PostMapping("/persons")
+    @PostMapping
     public ResponseEntity createPerson(@RequestBody PersonDto person) {
         personService.save(person);
         return ResponseEntity
@@ -83,7 +83,7 @@ public class PersonController {
      * @param person the person
      * @return the response entity
      */
-    @PutMapping("/persons")
+    @PutMapping
     public ResponseEntity updatePerson(@RequestBody PersonDto person) {
         personService.update(person);
         return ResponseEntity
@@ -97,7 +97,7 @@ public class PersonController {
      * @param personsId the persons id
      * @return the response entity
      */
-    @DeleteMapping("/persons/{personsId}")
+    @DeleteMapping("/{personsId}")
     public ResponseEntity deletePerson(@PathVariable Long personsId) {
         personService.delete(personsId);
         return ResponseEntity

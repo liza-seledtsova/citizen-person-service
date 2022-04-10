@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/state")
 public class StateController {
 
     private final IStateService stateService;
@@ -24,7 +24,7 @@ public class StateController {
      * @return the all state
      */
     @SneakyThrows
-    @GetMapping("/state")
+    @GetMapping
     public ResponseEntity getAllState() {
         return ResponseEntity
                 .ok()
@@ -37,7 +37,7 @@ public class StateController {
      * @param stateId the state id
      * @return the state by id
      */
-    @GetMapping("/state/{stateId}")
+    @GetMapping("/{stateId}")
     public ResponseEntity getStateById(@PathVariable Long stateId) {
         return ResponseEntity
                 .ok()
@@ -50,7 +50,7 @@ public class StateController {
      * @param state the state
      * @return the response entity
      */
-    @PostMapping("/state")
+    @PostMapping
     public ResponseEntity createState(@RequestBody StateDto state) {
         stateService.save(state);
         return ResponseEntity
@@ -64,7 +64,7 @@ public class StateController {
      * @param state the state
      * @return the response entity
      */
-    @PutMapping("/state")
+    @PutMapping
     public ResponseEntity updateState(@RequestBody StateDto state) {
         stateService.update(state);
         return ResponseEntity
@@ -78,7 +78,7 @@ public class StateController {
      * @param stateId the state id
      * @return the response entity
      */
-    @DeleteMapping("/state/{stateId}")
+    @DeleteMapping("/{stateId}")
     public ResponseEntity deleteState(@PathVariable Long stateId) {
         stateService.delete(stateId);
         return ResponseEntity

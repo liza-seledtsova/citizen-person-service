@@ -23,6 +23,11 @@ public interface IAddressService {
      */
     void save(AddressDto address);
 
+    /**
+     * Update.
+     *
+     * @param updateAddressDto the update address dto
+     */
     void update(AddressDto updateAddressDto);
 
     /**
