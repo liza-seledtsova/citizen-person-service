@@ -23,7 +23,7 @@ gradle bootJar
 ```
 //Run the project with "java" command
 
-cd build//libs
+cd build/libs
 
 java -jar citizen-person-service-0.0.1-SNAPSHOT.jar --port=8081
 ```
