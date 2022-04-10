@@ -6,6 +6,7 @@ import com.citizen.person.dto.PersonDto;
 import com.citizen.person.exception.EntityNotFoundException;
 import com.citizen.person.service.person.IPersonService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,9 +55,11 @@ public class PersonController {
      */
     @PostMapping("/persons/filter")
     public ResponseEntity getPersonsFiltered(@RequestBody FilterDto filterDto) {
+        Page page = filterDto.getResult();
         return ResponseEntity
                 .ok().
-                body(personService.getPersonsFiltered(filterDto, filterDto.getResult().getPageable()));
+                body(personService.getPersonsFiltered(filterDto,
+                        new PageImpl(page.getContent(), page.getNumber(), page.getSize(), page.getTotalElements())));
 
     }
 

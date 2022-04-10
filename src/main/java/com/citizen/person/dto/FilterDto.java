@@ -2,6 +2,7 @@ package com.citizen.person.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.springframework.data.domain.Sort;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,6 +22,8 @@ public class FilterDto implements Serializable {
     @JsonProperty
     @NonNull
     private List<FilterDataDto> filterDataDto;
+    @JsonProperty
+    private Sort.Direction sort;
     @JsonProperty
     private String selectedField;
 }

@@ -2,9 +2,9 @@ package com.citizen.person.service.person;
 
 import com.citizen.person.dto.FilterDataDto;
 import com.citizen.person.dto.FilterDto;
+import com.citizen.person.dto.PageImpl;
 import com.citizen.person.dto.PersonDto;
 import com.citizen.person.entity.Person;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -74,6 +74,6 @@ public interface IPersonService {
      * @param pageable  the pageable
      * @return the persons filtered
      */
-    FilterDto getPersonsFiltered(FilterDto filterDto, Pageable pageable);
+    FilterDto getPersonsFiltered(FilterDto filterDto, PageImpl pageable);
 
 }

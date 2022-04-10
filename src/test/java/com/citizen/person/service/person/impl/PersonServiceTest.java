@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -45,6 +46,41 @@ class PersonServiceTest {
 
     @Autowired
     private PersonService personService;
+
+    @Test
+    void testGetPersonsFiltered() {
+        FilterDto filterDto = FilterDto.builder()
+                .filterDataDto(Collections.singletonList(FilterDataDto.builder()
+                        .filterName(FilterName.FIRST_NAME)
+                        .filterType(FilterType.SELECT)
+                        .build()))
+                .sort(Sort.Direction.ASC)
+                .selectedField("firstName")
+                .build();
+
+        PageImpl pageable = new PageImpl(Collections.singletonList(PersonDto.builder()
+                .firstName("firstName")
+                .surname("surname")
+                .build()), 0, 10, 1);
+
+        when(personRepository.filter(filterDto.getFilterDataDto(), pageable.getPageable().getOffset(), pageable.getPageable().getPageSize()))
+                .thenReturn(Collections.singletonList(PersonDto.builder()
+                        .firstName("firstName")
+                        .surname("surname")
+                        .build()));
+
+        FilterDto result = personService.getPersonsFiltered(filterDto, pageable);
+
+        assertEquals(filterDto, result);
+    }
+
+    @Test
+    void testFilterData() {
+        List<FilterDataDto> filter = new ArrayList<>();
+        PageImpl pageable = new PageImpl(new ArrayList<>(), 0, 10, 0);
+        PageImpl<PersonDto> result = personService.filterData(filter, pageable);
+        assertEquals(0, result.getTotalElements());
+    }
 
     /**
      * Test update person not found.
@@ -78,58 +114,6 @@ class PersonServiceTest {
         when(personRepository.findById(updatePerson.getId())).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> personService.update(updatePerson));
-    }
-
-    /**
-     * Test filter data.
-     */
-    @Test
-    void testFilterData() {
-        List<FilterDataDto> filter = new ArrayList<>();
-        Pageable pageable = PageRequest.of(1, 10);
-        PersonDto personDto = PersonDto.builder()
-                .id(1L)
-                .firstName("firstName")
-                .surname("surname")
-                .gender("gender")
-                .dateOfBirth(new Date(Calendar.getInstance().getTime().getTime()))
-                .address(new ArrayList<>())
-                .build();
-        List<PersonDto> persons = new ArrayList<>();
-        persons.add(personDto);
-
-        when(personRepository.filter(filter, pageable.getSort(), pageable.getOffset(), pageable.getPageSize())).thenReturn(persons);
-
-        PageImpl<PersonDto> result = personService.filterData(filter, pageable);
-
-        assertEquals(1, result.getContent().size());
-    }
-
-    /**
-     * Test filter data with empty list.
-     */
-    @Test
-    void testFilterDataWithEmptyList() {
-        List<FilterDataDto> filter = new ArrayList<>();
-        Pageable pageable = PageRequest.of(0, 10);
-        PageImpl<PersonDto> result = personService.filterData(filter, pageable);
-
-        assertEquals(0, result.getTotalElements());
-    }
-
-    /**
-     * Test get persons filtered with empty filter.
-     */
-    @Test
-    void testGetPersonsFilteredWithEmptyFilter() {
-        FilterDto filterDto = FilterDto.builder()
-                .filterDataDto(Collections.emptyList())
-                .build();
-        Pageable pageable = PageRequest.of(0, 10);
-
-        PageImpl<PersonDto> result = personService.getPersonsFiltered(filterDto, pageable).getResult();
-
-        assertEquals(0, result.getTotalElements());
     }
 
     /**

@@ -29,4 +29,5 @@ public class Person {
     @JoinTable(name="person_address")
     private List<Address> address;
 
+
 }

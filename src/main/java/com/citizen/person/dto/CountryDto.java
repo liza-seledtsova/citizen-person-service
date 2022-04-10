@@ -1,5 +1,6 @@
 package com.citizen.person.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 /**
@@ -12,6 +13,8 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class CountryDto {
+    @JsonProperty
     private Long id;
+    @JsonProperty
     private String countryCode;
 }

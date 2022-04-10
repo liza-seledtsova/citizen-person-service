@@ -2,12 +2,10 @@ package com.citizen.person.dto;
 
 import com.citizen.person.enums.FilterName;
 import com.citizen.person.enums.FilterType;
-import com.citizen.person.enums.Sorting;
 import lombok.*;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
-
-import static com.citizen.person.enums.Sorting.ASC;
 
 /**
  * The filter data dto.
@@ -18,8 +16,8 @@ import static com.citizen.person.enums.Sorting.ASC;
 @AllArgsConstructor
 @Builder
 public class FilterDataDto {
-    @Builder.Default
-    private Sorting sorting = ASC;
+    private Sort.Direction sorting;
+    private boolean isSort;
     private List<String> value;
     private List<String> select;
     @NonNull

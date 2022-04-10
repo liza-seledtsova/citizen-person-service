@@ -91,7 +91,7 @@ public class PersonService implements IPersonService {
     }
 
     @Override
-    public FilterDto getPersonsFiltered(FilterDto filterDto, Pageable pageable) {
+    public FilterDto getPersonsFiltered(FilterDto filterDto, PageImpl pageable) {
         if (log.isDebugEnabled()) {
             try {
                 log.debug("The provided data: {}", objectMapper.writeValueAsString(filterDto));
@@ -103,13 +103,13 @@ public class PersonService implements IPersonService {
         return filterDto;
     }
 
-    public PageImpl<PersonDto> filterData(List<FilterDataDto> filter, Pageable pageable) {
-        List<PersonDto> persons = personRepository.filter(filter, pageable.isPaged() ? pageable.getSort() : Sort.unsorted(), pageable.getOffset(), pageable.getPageSize());
+    public PageImpl<PersonDto> filterData(List<FilterDataDto> filter, PageImpl pageable) {
+        List<PersonDto> persons = personRepository.filter(filter, pageable.getPageable().getOffset(), pageable.getPageable().getPageSize());
         if(log.isDebugEnabled()){
             log.debug("List of filtered persons: {}", persons.stream()
                     .map(person -> person.getFirstName() + " " + person.getSurname())
                     .collect(Collectors.joining()));
         }
-        return new PageImpl(persons, pageable.getPageNumber(), pageable.getPageSize(), new ObjectMapper().valueToTree(pageable), persons.size());
+        return new PageImpl(persons, pageable.getPageable().getPageNumber(), pageable.getPageable().getPageSize(), persons.size());
     }
 }

@@ -8,7 +8,6 @@ import com.citizen.person.repository.PersonRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -16,13 +15,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.springframework.data.jpa.repository.query.QueryUtils.toOrders;
+import static com.citizen.person.enums.FilterName.FIRST_NAME;
 
 @Repository
 @Slf4j
@@ -35,23 +31,24 @@ public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
     private static final String UNDER_SCORE = "_";
 
     @Override
-    public List<PersonDto> filter(List<FilterDataDto> filter, Sort sort, long offSet, int pageSize) {
+    public List<PersonDto> filter(List<FilterDataDto> filter, long offSet, int pageSize) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Person> criteriaQuery = criteriaBuilder.createQuery(Person.class);
         Root<Person> root = criteriaQuery.from(Person.class);
-        predicateRootBuilder(criteriaBuilder, filter, root, criteriaQuery);
-        criteriaQuery.orderBy(toOrders(sort, root, criteriaBuilder));
+        List<Order> orders = predicateRootBuilder(criteriaBuilder, filter, root, criteriaQuery);
         criteriaQuery.distinct(true);
+        sorting(criteriaQuery, orders);
         TypedQuery<Person> typedQuery = entityManager.createQuery(criteriaQuery);
         long total = typedQuery.getResultList().size();
         typedQuery.setFirstResult((int) offSet);
         typedQuery.setMaxResults(pageSize);
         log.info("Search hints with filter data: {}", total);
-        return  total > offSet ? typedQuery.getResultList().stream().map(personMapper::toDto).collect(Collectors.toList()) : Collections.emptyList();
+        return total > offSet ? typedQuery.getResultList().stream().map(personMapper::toDto).collect(Collectors.toList()) : Collections.emptyList();
     }
 
-    private void predicateRootBuilder(CriteriaBuilder builder, List<FilterDataDto> filterData, Root<Person> root, CriteriaQuery<Person> criteriaQuery) {
+    private List<Order> predicateRootBuilder(CriteriaBuilder builder, List<FilterDataDto> filterData, Root<Person> root, CriteriaQuery<Person> criteriaQuery) {
         Predicate predicate = builder.conjunction();
+        List<Order> sortPredicate = new ArrayList<>();
         for (FilterDataDto param : filterData) {
             switch (param.getFilterType()) {
                 case RANGE:
@@ -63,8 +60,16 @@ public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
                 default:
                     log.warn("Invalid type of filer: {}, filed name {}", param.getFilterType(), param.getFilterName());
             }
+            if (param.isSort()) {
+                if (param.getSorting().isAscending()) {
+                    sortPredicate.add(builder.asc(root));
+                } else {
+                    sortPredicate.add(builder.desc(root));
+                }
+            }
         }
         criteriaQuery.where(predicate);
+        return sortPredicate;
     }
 
     private Predicate selectQueryBuilder(CriteriaBuilder builder, Root<Person> root, CriteriaQuery<Person> criteriaQuery, FilterDataDto filterProperties) {
@@ -97,10 +102,11 @@ public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
                 nestedPredicate = builder.like(join.get(newKey), query.get(0));
             }
             if (param.isGroupBy()) {
-                criteriaQuery.multiselect(join.get(newKey), builder.count(join.get(newKey)));
-                criteriaQuery.groupBy(join.get(newKey));
+                Join<Object, ?> lastOfJoin = join.getJoins().stream().reduce((prev, next) -> next).get();
+                criteriaQuery.multiselect(lastOfJoin.get(newKey), builder.count(lastOfJoin.get(newKey)));
+                criteriaQuery.groupBy(lastOfJoin.get(newKey));
             }
-        }else log.info("Empty name field after parsing in entity {}", param.getFilterName());
+        } else log.info("Empty name field after parsing in entity {}", param.getFilterName());
         return nestedPredicate;
     }
 
@@ -137,4 +143,11 @@ public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
         criteriaQuery.where(predicate);
         return predicate;
     }
+
+    private void sorting(CriteriaQuery<Person> criteriaQuery, List<Order> orders) {
+        if (!orders.isEmpty()) {
+            criteriaQuery.orderBy(orders);
+        } else Sort.by(FIRST_NAME.getValue());
+    }
+
 }

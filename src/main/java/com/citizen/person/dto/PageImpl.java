@@ -18,17 +18,7 @@ public class PageImpl<T> extends org.springframework.data.domain.PageImpl<T> {
     public PageImpl(@JsonProperty("content") List<T> content,
                     @JsonProperty("number") int page,
                     @JsonProperty("size") int size,
-                    @JsonProperty("pageable") JsonNode pageable,
-                    @JsonProperty("totalElements") long total) {
-
-        super(content, PageRequest.of(page, size), total);
-    }
-
-    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public PageImpl(@JsonProperty("content") List<T> content,
-                    @JsonProperty("number") int page,
-                    @JsonProperty("size") int size,
-                    @JsonProperty("totalElements") long total) {
+                    @JsonProperty("totalElements") long total){
 
         super(content, PageRequest.of(page, size), total);
     }

@@ -13,9 +13,7 @@ spring:
   jpa:
     defer-datasource-initialization: true
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
-    ddl-auto: none
+    ddl-auto: create-drop
 springdoc:
   swagger-ui:
     url: /openapi.yaml
-  api-docs:
-    enabled=false:
