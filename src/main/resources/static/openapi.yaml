@@ -334,7 +334,7 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ErrorMessage"
-  "/api/v1/country":
+  "/api/v1/countries":
     get:
       tags:
         - country
@@ -491,7 +491,7 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ErrorMessage"
-  "/api/v1/city":
+  "/api/v1/cities":
     get:
       tags:
         - city
@@ -648,7 +648,7 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ErrorMessage"
-  "/api/v1/address":
+  "/api/v1/addresses":
     get:
       tags:
         - address
@@ -1081,7 +1081,7 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ErrorMessage"
-  "/api/v1/country/{countryId}":
+  "/api/v1/countries/{countryId}":
     get:
       tags:
         - country
@@ -1137,7 +1137,7 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ErrorMessage"
-  "/api/v1/city/{cityId}":
+  "/api/v1/cities/{cityId}":
     get:
       tags:
         - city
@@ -1248,7 +1248,7 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ErrorMessage"
-  "/api/v1/address/{addressId}":
+  "/api/v1/addresses/{addressId}":
     get:
       tags:
         - address
@@ -1359,7 +1359,7 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ErrorMessage"
-  "/api/v1/country/{countyId}":
+  "/api/v1/countries/{countyId}":
     delete:
       tags:
         - country

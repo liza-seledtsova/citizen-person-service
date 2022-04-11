@@ -14,6 +14,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,16 +39,16 @@ public class PersonService implements IPersonService {
     private final IPersonMapper personMapper;
 
     @Override
-    public List<PersonDto> getAll() {
-        List<PersonDto> persons = personRepository.findAll().stream()
-                .map(personMapper::toDto)
-                .collect(Collectors.toList());
+    public PageImpl<PersonDto> getAll(Pageable pageable) {
+        Page<Person> persons =personRepository.findAll(pageable);
         if (log.isDebugEnabled()) {
             log.debug("List of person: {}", persons.stream()
                     .map(person -> person.getFirstName() + " " + person.getSurname())
                     .collect(Collectors.joining()));
         }
-        return persons;
+        return new PageImpl(persons.getContent().stream()
+                .map(personMapper::toDto)
+                .collect(Collectors.toList()), pageable.getPageNumber(), pageable.getPageSize(), persons.getTotalElements());
     }
 
     @Override

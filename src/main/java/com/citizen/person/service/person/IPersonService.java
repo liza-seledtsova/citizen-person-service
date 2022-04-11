@@ -5,6 +5,7 @@ import com.citizen.person.dto.FilterDto;
 import com.citizen.person.dto.PageImpl;
 import com.citizen.person.dto.PersonDto;
 import com.citizen.person.entity.Person;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +20,7 @@ public interface IPersonService {
      *
      * @return the persons
      */
-    List<PersonDto> getAll();
+    PageImpl<PersonDto> getAll(Pageable pageable);
 
     /**
      * Save.

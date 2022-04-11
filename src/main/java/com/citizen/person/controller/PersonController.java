@@ -3,14 +3,13 @@ package com.citizen.person.controller;
 import com.citizen.person.dto.FilterDto;
 import com.citizen.person.dto.PageImpl;
 import com.citizen.person.dto.PersonDto;
-import com.citizen.person.exception.EntityNotFoundException;
 import com.citizen.person.service.person.IPersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * The person controller.
@@ -31,16 +30,16 @@ public class PersonController {
      */
     @GetMapping
     public ResponseEntity getAllPersons(@RequestParam int pageNumber, @RequestParam int pageSize) {
-        List<PersonDto> persons = personService.getAll();
+        PageImpl<PersonDto> persons = personService.getAll(PageRequest.of(pageNumber, pageSize));
+        FilterDto<PersonDto> filterDto = new FilterDto<>();
+        filterDto.setResult(persons);
+        filterDto.setFilterDataDto(personService.generateFilerData(persons.getContent()));
         return ResponseEntity
                 .ok()
-                .body(FilterDto.builder()
-                        .result(new PageImpl(persons, pageNumber, pageSize, persons.size()))
-                        .filterDataDto(personService.generateFilerData(persons)).build());
+                .body(filterDto);
     }
 
     @GetMapping("/{personsId}")
-    @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity getPersonById(@PathVariable Long personsId) {
         return ResponseEntity
                 .ok()
