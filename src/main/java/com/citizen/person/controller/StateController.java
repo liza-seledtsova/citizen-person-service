@@ -3,7 +3,6 @@ package com.citizen.person.controller;
 import com.citizen.person.dto.StateDto;
 import com.citizen.person.service.state.IStateService;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,12 +22,9 @@ public class StateController {
      *
      * @return the all state
      */
-    @SneakyThrows
     @GetMapping
     public ResponseEntity getAllState() {
-        return ResponseEntity
-                .ok()
-                .body(stateService.getAll());
+        return ResponseEntity.ok().body(stateService.getAll());
     }
 
     /**
@@ -39,9 +35,7 @@ public class StateController {
      */
     @GetMapping("/{stateId}")
     public ResponseEntity getStateById(@PathVariable Long stateId) {
-        return ResponseEntity
-                .ok()
-                .body(stateService.getById(stateId));
+        return ResponseEntity.ok().body(stateService.getById(stateId));
     }
 
     /**
@@ -53,9 +47,7 @@ public class StateController {
     @PostMapping
     public ResponseEntity createState(@RequestBody StateDto state) {
         stateService.save(state);
-        return ResponseEntity
-                .ok()
-                .build();
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -67,9 +59,7 @@ public class StateController {
     @PutMapping
     public ResponseEntity updateState(@RequestBody StateDto state) {
         stateService.update(state);
-        return ResponseEntity
-                .ok()
-                .build();
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -81,9 +71,7 @@ public class StateController {
     @DeleteMapping("/{stateId}")
     public ResponseEntity deleteState(@PathVariable Long stateId) {
         stateService.delete(stateId);
-        return ResponseEntity
-                .ok()
-                .build();
+        return ResponseEntity.ok().build();
     }
 
 }
